@@ -1,0 +1,4085 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="JAMA Graphics — Creative Design Studio. Poster, Logo, Business Card, Flyer, Website Design. Ubunifu wa kiwango cha kimataifa Tanzania.">
+<meta name="theme-color" content="#0a0a0a">
+<title>JAMA Graphics — Creative Design Studio | Ubunifu wa Kiwango cha Juu</title>
+
+<!-- Open Graph -->
+<meta property="og:title" content="JAMA Graphics — Creative Design Studio">
+<meta property="og:description" content="Tunabadilisha brand yako kuwa ya kipekee. Logo, Poster, Flyer, Business Card, Website.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ===== RESET & VARIABLES ===== */
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  
+  :root {
+    --bg: #0a0a0a;
+    --bg-2: #111111;
+    --bg-3: #161616;
+    --bg-4: #1e1e1e;
+    --gold: #d4af37;
+    --gold-2: #f4d03f;
+    --gold-dark: #a88a2b;
+    --text: #f5f5f5;
+    --muted: #8a8a8a;
+    --border: rgba(212, 175, 55, 0.15);
+    --border-strong: rgba(212, 175, 55, 0.4);
+    --wa: #25D366;
+    --success: #27ae60;
+    --error: #e74c3c;
+    --transition: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  [data-theme="light"] {
+    --bg: #fafafa;
+    --bg-2: #ffffff;
+    --bg-3: #f5f5f5;
+    --bg-4: #ebebeb;
+    --text: #0a0a0a;
+    --muted: #666;
+    --border: rgba(212, 175, 55, 0.35);
+  }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    cursor: none;
+    transition: background 0.4s, color 0.4s;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(212,175,55,0.12), transparent 30%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 800; letter-spacing: -0.02em; }
+
+  img { max-width: 100%; display: block; }
+
+  /* ===== CUSTOM CURSOR ===== */
+  .cursor {
+    position: fixed;
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s;
+    mix-blend-mode: difference;
+  }
+  .cursor-follower {
+    position: fixed;
+    width: 40px; height: 40px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.35s var(--transition), width 0.3s, height 0.3s;
+    mix-blend-mode: difference;
+  }
+  .cursor-follower.hovering {
+    width: 60px; height: 60px;
+    background: rgba(212, 175, 55, 0.15);
+  }
+  @media (max-width: 768px) {
+    .cursor, .cursor-follower { display: none; }
+    body { cursor: auto; }
+  }
+
+  /* ===== PRELOADER ===== */
+  .preloader {
+    position: fixed;
+    inset: 0;
+    background: #0a0a0a;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    transition: opacity 0.6s, visibility 0.6s;
+  }
+  .preloader.hidden { opacity: 0; visibility: hidden; }
+  
+  .preloader-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #f5f5f5;
+    letter-spacing: -1px;
+    animation: fadeInUp 0.8s var(--transition);
+  }
+  .preloader-logo span { color: var(--gold); }
+  
+  .preloader-bar {
+    width: 220px;
+    height: 3px;
+    background: rgba(212, 175, 55, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .preloader-bar::after {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 40%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-2));
+    animation: loading 1.5s infinite;
+  }
+  @keyframes loading {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(350%); }
+  }
+
+  /* ===== SCROLL PROGRESS ===== */
+  .scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-2));
+    z-index: 9999;
+    transition: width 0.1s;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+  }
+
+  /* ===== NAVBAR ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10, 10, 10, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+    transition: padding 0.3s, background 0.3s;
+  }
+  [data-theme="light"] nav { background: rgba(250, 250, 250, 0.85); }
+  nav.scrolled { padding: 12px 5%; }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.5px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    gap: 35px;
+    list-style: none;
+    align-items: center;
+  }
+  .nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px; left: 0;
+    width: 0; height: 1.5px;
+    background: var(--gold);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-tools {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .nav-tool {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+  }
+  .nav-tool:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: scale(1.05);
+  }
+
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 1.6rem;
+    cursor: pointer;
+  }
+
+  /* ===== BUTTONS ===== */
+  .btn {
+    padding: 14px 32px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.35s var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 100%);
+    color: #0a0a0a;
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.25);
+  }
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 45px rgba(212, 175, 55, 0.5);
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 0; height: 0;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+  .btn-primary:hover::before {
+    width: 400px; height: 400px;
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-3px);
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 5% 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.18) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float1 8s ease-in-out infinite;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -300px; left: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float2 10s ease-in-out infinite;
+  }
+  @keyframes float1 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-40px, 40px); }
+  }
+  @keyframes float2 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(40px, -40px); }
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 40px;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.78rem;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    background: rgba(212, 175, 55, 0.05);
+    font-weight: 600;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 7vw, 5.5rem);
+    line-height: 1;
+    margin-bottom: 25px;
+  }
+  .hero h1 .gold {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 50%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 600px;
+    margin-bottom: 40px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 30px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+  .hero-stat strong {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+  }
+  .hero-stat span {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .hero-visual {
+    position: relative;
+    display: grid;
+    gap: 18px;
+  }
+  .hero-panel {
+    width: 100%;
+    max-width: 440px;
+    margin-left: auto;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+    position: relative;
+    transition: transform 0.5s var(--transition);
+  }
+  .hero-panel:hover { transform: translateY(-8px) rotate(-1deg); }
+  .hero-panel img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+  }
+  .hero-panel.small {
+    width: min(75%, 280px);
+    margin-left: auto;
+    margin-top: -80px;
+  }
+  .hero-panel.small img { aspect-ratio: 1; }
+
+  .mini-badge {
+    position: absolute;
+    right: 18px;
+    top: 18px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(10,10,10,0.85);
+    border: 1px solid var(--border-strong);
+    color: var(--gold);
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    z-index: 3;
+    backdrop-filter: blur(10px);
+  }
+
+  /* ===== SECTIONS ===== */
+  section { padding: 100px 5%; position: relative; z-index: 1; }
+
+  .section-head { margin-bottom: 60px; max-width: 700px; }
+  .section-label {
+    color: var(--gold);
+    font-size: 0.78rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::before {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--gold);
+  }
+  .section-head h2 {
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    line-height: 1.1;
+    margin-bottom: 15px;
+  }
+  .section-head p { color: var(--muted); font-size: 1.05rem; }
+
+  /* ===== SERVICES ===== */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 20px;
+  }
+  .service-card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 35px 30px;
+    transition: all 0.4s var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: -60px;
+    width: 120px; height: 120px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.15), transparent 70%);
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.5s;
+  }
+  .service-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--border-strong);
+    background: var(--bg-3);
+  }
+  .service-card:hover::before { opacity: 1; }
+  .service-card:hover::after { opacity: 1; bottom: -30px; right: -30px; }
+
+  .service-icon {
+    width: 55px; height: 55px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 22px;
+    transition: all 0.4s;
+  }
+  .service-card:hover .service-icon {
+    transform: scale(1.1) rotate(-5deg);
+    background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  }
+
+  .service-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  .service-card p { color: var(--muted); font-size: 0.92rem; margin-bottom: 16px; }
+  .service-price {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== PROCESS ===== */
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    position: relative;
+  }
+  .process-step {
+    text-align: center;
+    padding: 30px 20px;
+    position: relative;
+  }
+  .process-num {
+    width: 70px; height: 70px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.02));
+    border: 2px solid var(--border-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--gold);
+    position: relative;
+    transition: all 0.4s;
+  }
+  .process-step:hover .process-num {
+    background: linear-gradient(135deg, var(--gold), var(--gold-2));
+    color: #0a0a0a;
+    transform: scale(1.1);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+  }
+  .process-step h3 { font-size: 1.1rem; margin-bottom: 8px; }
+  .process-step p { color: var(--muted); font-size: 0.9rem; }
+
+  /* ===== PORTFOLIO ===== */
+  .portfolio-filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .filter-btn {
+    padding: 9px 20px;
+    border-radius: 100px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+  .filter-btn:hover { color: var(--gold); border-color: var(--border-strong); }
+  .filter-btn.active {
+    background: linear-gradient(135deg, var(--gold), var(--gold-2));
+    color: #0a0a0a;
+    border-color: transparent;
+    box-shadow: 0 10px 30px rgba(212,175,55,0.25);
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .portfolio-item {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.4s var(--transition);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.16);
+  }
+  .portfolio-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s var(--transition), filter 0.4s;
+  }
+  .portfolio-item:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  }
+  .portfolio-item:hover img { transform: scale(1.1); filter: saturate(1.15); }
+
+  .portfolio-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, transparent 60%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 22px 20px;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+  .portfolio-overlay h4 { font-size: 1.1rem; margin-bottom: 5px; font-weight: 700; }
+  .portfolio-overlay span {
+    color: var(--gold);
+    font-size: 0.72rem;
+    letter-spacing: 1.7px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .portfolio-item.hidden { display: none; }
+
+  /* ===== LIGHTBOX ===== */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 5, 5, 0.98);
+    backdrop-filter: blur(15px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 40px 20px;
+  }
+  .lightbox.active { display: flex; }
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 12px;
+    animation: zoomIn 0.4s var(--transition);
+    box-shadow: 0 30px 90px rgba(0,0,0,0.7);
+  }
+  @keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 25px; right: 30px;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 45px; height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+  }
+  .lightbox-close:hover { background: var(--gold); color: #0a0a0a; transform: rotate(90deg); }
+
+  /* ===== ABOUT ===== */
+  .about-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .about-img {
+    aspect-ratio: 1;
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+  }
+  .about-img img { width: 100%; height: 100%; object-fit: cover; }
+  .about-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent 60%);
+    pointer-events: none;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 35px;
+  }
+  .stat {
+    padding: 25px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    transition: all 0.4s;
+  }
+  .stat:hover {
+    transform: translateY(-5px);
+    border-color: var(--border-strong);
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 5px;
+  }
+  .stat-label { font-size: 0.85rem; color: var(--muted); }
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .testimonial-card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 30px 26px;
+    transition: all 0.4s var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+  .testimonial-card::before {
+    content: '"';
+    position: absolute;
+    top: 5px; right: 20px;
+    font-family: 'Syne', sans-serif;
+    font-size: 5rem;
+    color: rgba(212, 175, 55, 0.15);
+    line-height: 1;
+  }
+  .testimonial-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-strong);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+  }
+  .testimonial-stars {
+    color: var(--gold);
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    font-size: 0.85rem;
+  }
+  .testimonial-card p { color: var(--text); font-size: 0.95rem; margin-bottom: 20px; position: relative; z-index: 1; }
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .testimonial-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-2));
+    color: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .testimonial-name {
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--text);
+  }
+  .testimonial-role {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  /* ===== CONTACT ===== */
+  .contact-wrap {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .contact-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 50px;
+  }
+  .contact-card {
+    padding: 35px 25px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.4s var(--transition);
+  }
+  .contact-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--border-strong);
+    background: var(--bg-3);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+  }
+  .contact-card .icon {
+    width: 60px; height: 60px;
+    margin: 0 auto 15px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    transition: all 0.4s;
+  }
+  .contact-card:hover .icon {
+    background: linear-gradient(135deg, var(--gold), var(--gold-2));
+    transform: scale(1.1) rotate(-5deg);
+  }
+  .contact-card h4 {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .contact-card p { font-size: 1rem; font-weight: 500; word-break: break-word; }
+
+  /* ===== CTA BANNER ===== */
+  .cta-banner {
+    margin-top: 80px;
+    background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(212,175,55,0.02));
+    border: 1px solid var(--border);
+    border-radius: 26px;
+    padding: 50px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -10%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.15), transparent 70%);
+    border-radius: 50%;
+  }
+  .cta-banner h3 {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  .cta-banner p { color: var(--muted); margin: 0; position: relative; z-index: 1; }
+  .cta-banner .btn { position: relative; z-index: 1; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    padding: 60px 5% 30px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    position: relative;
+    z-index: 1;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    text-align: left;
+  }
+  .footer-col h5 {
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .footer-col a {
+    display: block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    margin-bottom: 10px;
+    transition: all 0.3s;
+  }
+  .footer-col a:hover { color: var(--gold); transform: translateX(5px); }
+  .footer-social {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  .footer-social a {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    transition: all 0.3s;
+    margin-bottom: 0;
+  }
+  .footer-social a:hover {
+    background: var(--gold);
+    color: #0a0a0a;
+    border-color: var(--gold);
+    transform: translateY(-3px) rotate(-5deg);
+  }
+  .footer-bottom {
+    padding-top: 30px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+    font-size: 0.82rem;
+  }
+  .footer-bottom span { color: var(--gold); }
+
+  /* ===== WHATSAPP FLOAT ===== */
+  .wa-float {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    width: 60px; height: 60px;
+    background: var(--wa);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+    z-index: 999;
+    transition: all 0.35s var(--transition);
+    animation: waPulse 2.5s infinite;
+  }
+  .wa-float:hover { transform: scale(1.1) rotate(-5deg); }
+  .wa-float svg { width: 30px; height: 30px; fill: white; }
+  @keyframes waPulse {
+    0%, 100% { box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); }
+    50% { box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4), 0 0 0 15px rgba(37, 211, 102, 0.1); }
+  }
+
+  /* ===== BACK TO TOP ===== */
+  .back-top {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 50px; height: 50px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-2));
+    color: #0a0a0a;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.4s var(--transition);
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  .back-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+  .back-top:hover { transform: translateY(-5px) scale(1.05); }
+
+  /* ===== REVEAL ANIMATIONS ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s var(--transition), transform 0.9s var(--transition);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal.delay-1 { transition-delay: 0.1s; }
+  .reveal.delay-2 { transition-delay: 0.2s; }
+  .reveal.delay-3 { transition-delay: 0.3s; }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .hero-layout { grid-template-columns: 1fr; gap: 60px; }
+    .hero-visual { max-width: 400px; margin: 0 auto; }
+    .hero-panel.small { margin-top: -60px; }
+    .about-wrap { grid-template-columns: 1fr; gap: 40px; }
+    .about-img { max-width: 400px; margin: 0 auto; }
+  }
+
+  @media (max-width: 768px) {
+    body { cursor: auto; }
+    .nav-links {
+      position: fixed;
+      top: 70px; right: -100%;
+      width: 260px; height: calc(100vh - 70px);
+      background: var(--bg-2);
+      flex-direction: column;
+      padding: 40px 30px;
+      gap: 25px;
+      transition: right 0.4s;
+      border-left: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .nav-links.open { right: 0; }
+    .menu-toggle { display: block; }
+    section { padding: 70px 5%; }
+    .hero { padding: 110px 5% 60px; min-height: auto; }
+    .hero-stats { gap: 20px; }
+    .cta-banner { padding: 35px 25px; flex-direction: column; text-align: center; }
+    .footer-bottom { justify-content: center; text-align: center; }
+  }
+
+  @media (max-width: 480px) {
+    .portfolio-grid, .services-grid { grid-template-columns: 1fr; }
+    .about-stats { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2.2rem; }
+    .wa-float, .back-top { width: 50px; height: 50px; bottom: 18px; }
+    .wa-float { left: 18px; }
+    .back-top { right: 18px; }
+  }
+
+  /* ===== REDUCED MOTION ===== */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== PRELOADER ===== -->
+<div class="preloader" id="preloader">
+  <div class="preloader-logo">JAMA<span>.</span>Graphics</div>
+  <div class="preloader-bar"></div>
+</div>
+
+<!-- ===== CUSTOM CURSOR ===== -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<!-- ===== SCROLL PROGRESS ===== -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ===== NAVBAR ===== -->
+<nav id="navbar">
+  <a href="#home" class="logo">JAMA<span>.</span>Graphics</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Nyumbani</a></li>
+    <li><a href="#services">Huduma</a></li>
+    <li><a href="#portfolio">Kazi Zangu</a></li>
+    <li><a href="#about">Kuhusu</a></li>
+    <li><a href="#contact">Wasiliana</a></li>
+  </ul>
+  <div class="nav-tools">
+    <button class="nav-tool" id="themeToggle" title="Badilisha theme" aria-label="Badilisha theme">🌙</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Fungua menu">☰</button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <div class="hero-layout">
+    <div class="hero-content">
+      <span class="hero-tag">Creative Design Studio</span>
+      <h1>Kubuni <span class="gold">Mawazo</span><br>Yako Kuwa Uhalisia.</h1>
+      <p>JAMA Graphics ni studio ya ubunifu inayotoa huduma za kisasa za graphics design — kutoka poster, logo, business card hadi website. Tunabadilisha brand yako kuwa ya kipekee.</p>
+      <div class="btn-group" style="display:flex;gap:15px;flex-wrap:wrap">
+        <a href="#portfolio" class="btn btn-primary">Ona Kazi Zangu →</a>
+        <a href="#contact" class="btn btn-outline">Wasiliana Nami</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <strong data-count="10 0">0</strong>
+          <span>Kazi</span>
+        </div>
+        <div class="hero-stat">
+          <strong data-count="80">0</strong>
+          <span>Wateja</span>
+        </div>
+        <div class="hero-stat">
+          <strong data-count="2">0</strong>
+          <span>Miaka</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="hero-panel">
+        <div class="mini-badge">Top Picks</div>
+        <img src="images/poster1.jpg" alt="Featured design" loading="lazy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 600 760%22><rect fill=%22%23111111%22 width=%22600%22 height=%22760%22/><text x=%22300%22 y=%22380%22 fill=%22%23d4af37%22 font-family=%22sans-serif%22 font-size=%2224%22 text-anchor=%22middle%22>Featured Design</text></svg>'">
+      </div>
+      <div class="hero-panel small">
+        <img src="images/logo1.jpg" alt="Brand logo" loading="lazy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 400%22><rect fill=%22%23111111%22 width=%22400%22 height=%22400%22/><text x=%22200%22 y=%22200%22 fill=%22%23d4af37%22 font-family=%22sans-serif%22 font-size=%2222%22 text-anchor=%22middle%22>Logo</text></svg>'">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section id="services">
+  <div class="section-head reveal">
+    <span class="section-label">Huduma Zangu</span>
+    <h2>Kila Kitu Unachohitaji<br>Kwa Brand Yako.</h2>
+    <p>Huduma za ubunifu za kiwango cha juu zinazolenga kukuza biashara na brand yako.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">🎨</div>
+      <h3>Poster Design</h3>
+      <p>Poster za matangazo, matukio, na biashara zenye mvuto wa kipekee.</p>
+      <div class="service-price">Kuanzia TSh 25,000</div>
+    </div>
+    <div class="service-card reveal delay-1">
+      <div class="service-icon">📱</div>
+      <h3>Social Media Poster</h3>
+      <p>Mabango ya Instagram, Facebook, na TikTok yanayovutia wateja.</p>
+      <div class="service-price">Kuanzia TSh 15,000</div>
+    </div>
+    <div class="service-card reveal delay-2">
+      <div class="service-icon">📄</div>
+      <h3>Flyer Design</h3>
+      <p>Flyer za kitaalamu kwa matangazo ya biashara na matukio mbalimbali.</p>
+      <div class="service-price">Kuanzia TSh 30,000</div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">💳</div>
+      <h3>Business Card</h3>
+      <p>Kadi za biashara za kisasa zinazoacha hisia ya kudumu kwa wateja.</p>
+      <div class="service-price">Kuanzia TSh 40,000</div>
+    </div>
+    <div class="service-card reveal delay-1">
+      <div class="service-icon">💻</div>
+      <h3>Website Design</h3>
+      <p>Tovuti za kisasa, za haraka na zinazofanya kazi kwenye simu na kompyuta.</p>
+      <div class="service-price">Kuanzia TSh 500,000</div>
+    </div>
+    <div class="service-card reveal delay-2">
+      <div class="service-icon">✨</div>
+      <h3>Logo Design</h3>
+      <p>Logo za kipekee zinazowakilisha utambulisho wa brand yako kikamilifu.</p>
+      <div class="service-price">Kuanzia TSh 50,000</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROCESS ===== -->
+<section id="process">
+  <div class="section-head reveal">
+    <span class="section-label">Jinsi Tunavyofanya Kazi</span>
+    <h2>Mchakato Rahisi.<br>Matokeo Bora.</h2>
+    <p>Hatua nne rahisi kutoka mawazo yako hadi kazi iliyokamilika.</p>
+  </div>
+
+  <div class="process-grid">
+    <div class="process-step reveal">
+      <div class="process-num">01</div>
+      <h3>Mazungumzo</h3>
+      <p>Unatuambia unahitaji nini, tunakuelewa.</p>
+    </div>
+    <div class="process-step reveal delay-1">
+      <div class="process-num">02</div>
+      <h3>Ubunifu</h3>
+      <p>Tunatengeneza michoro 3 tofauti kwa ajili yako.</p>
+    </div>
+    <div class="process-step reveal delay-2">
+      <div class="process-num">03</div>
+      <h3>Marekebisho</h3>
+      <p>Unachagua unayopenda, tunaboresha.</p>
+    </div>
+    <div class="process-step reveal delay-3">
+      <div class="process-num">04</div>
+      <h3>Kukabidhi</h3>
+      <p>Unapata faili zote za ubora wa juu.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PORTFOLIO ===== -->
+<section id="portfolio">
+  <div class="section-head reveal">
+    <span class="section-label">Kazi Zangu</span>
+    <h2>Portfolio Yangu.</h2>
+    <p>Mkusanyiko wa kazi mbalimbali nilizozifanya kwa wateja na miradi binafsi.</p>
+  </div>
+
+  <div class="portfolio-filters reveal">
+    <button class="filter-btn active" data-filter="all">Zote</button>
+    <button class="filter-btn" data-filter="poster">Poster</button>
+    <button class="filter-btn" data-filter="social">Social Media</button>
+    <button class="filter-btn" data-filter="flyer">Flyer</button>
+    <button class="filter-btn" data-filter="card">Business Card</button>
+    <button class="filter-btn" data-filter="website">Website</button>
+    <button class="filter-btn" data-filter="logo">Logo</button>
+  </div>
+
+  <div class="portfolio-grid" id="portfolioGrid"></div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="about-wrap">
+    <div class="reveal">
+      <span class="section-label">Kuhusu Jama Graphics</span>
+      <h2 style="font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1.1; margin-bottom: 20px;">Tunabuni.<br>Tunavutia.<br><span style="color: var(--gold);">Tunabadilisha.</span></h2>
+      <p style="color: var(--muted); margin-bottom: 15px;">JAMA Graphics ni studio ya ubunifu inayojikita katika kutoa huduma bora za graphics design kwa biashara, taasisi, na watu binafsi. Tunachanganya ubunifu wa kisasa na uelewa wa soko la Kitanzania.</p>
+      <p style="color: var(--muted);">Kila mradi tunaifanya kwa umakini mkubwa, kuhakikisha brand yako inaonekana tofauti na wengine.</p>
+      
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-num" data-count="150">0+</div>
+          <div class="stat-label">Kazi Zilizokamilika</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" data-count="80">0+</div>
+          <div class="stat-label">Wateja Wenye Furaha</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-img reveal">
+      <img src="images/logo4.jpg" alt="Studio artwork" loading="lazy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 600 600%22><rect fill=%22%23111111%22 width=%22600%22 height=%22600%22/><text x=%22300%22 y=%22300%22 fill=%22%23d4af37%22 font-family=%22sans-serif%22 font-size=%2226%22 text-anchor=%22middle%22>Studio</text></svg>'">
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section>
+  <div class="section-head reveal">
+    <span class="section-label">Wateja Wanasema</span>
+    <h2>Wateja Wanaotuthamini.</h2>
+    <p>Design ya kitaalamu inayoaminika, kukumbukwa, na kukuza biashara.</p>
+  </div>
+
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal">
+      <div class="testimonial-stars">★★★★★</div>
+      <p>“Kazi ilikuwa ya kiwango cha juu na ilisaidia brand yetu kuonekana credible zaidi. Tulipata wateja wengi baada ya launch.”</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">A</div>
+        <div>
+          <div class="testimonial-name">Amina Hassan</div>
+          <div class="testimonial-role">Mmiliki, Boutique</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal delay-1">
+      <div class="testimonial-stars">★★★★★</div>
+      <p>“Design ilikuwa clean, modern, na exactly kile tulichohitaji kwa promotion yetu na social media presence.”</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">D</div>
+        <div>
+          <div class="testimonial-name">David Mwakyusa</div>
+          <div class="testimonial-role">Marketing Lead</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal delay-2">
+      <div class="testimonial-stars">★★★★★</div>
+      <p>“Very professional na on time. Kila detail ilikuwa intentional na matokeo ya mwisho yalikuwa polished sana.”</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">G</div>
+        <div>
+          <div class="testimonial-name">Grace Kimaro</div>
+          <div class="testimonial-role">Event Manager</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="contact-wrap reveal">
+    <span class="section-label">Wasiliana Nami</span>
+    <h2 style="font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; margin-bottom: 15px;">Una Mradi?<br><span style="color: var(--gold);">Tuongee.</span></h2>
+    <p style="color: var(--muted); max-width: 500px; margin: 0 auto;">Wasiliana nami kwa simu au barua pepe kwa maelezo zaidi kuhusu huduma zangu.</p>
+
+    <div class="contact-cards">
+      <a href="tel:0753308928" class="contact-card">
+        <div class="icon">📞</div>
+        <h4>Simu / WhatsApp</h4>
+        <p>0753 308 928</p>
+      </a>
+      <a href="mailto:wwwsjuma2@gmail.com" class="contact-card">
+        <div class="icon">✉️</div>
+        <h4>Barua Pepe</h4>
+        <p>wwwsjuma2@gmail.com</p>
+      </a>
+    </div>
+
+    <div class="cta-banner reveal">
+      <div>
+        <h3>Uko tayari kuboresha brand yako?</h3>
+        <p>Kutoka mawazo hadi kazi ya mwisho — wazo lako linalofuata linahitaji ubunifu wa kipekee.</p>
+      </div>
+      <a href="https://wa.me/255753308928?text=Habari%20JAMA%20Graphics!%20Nahitaji%20huduma%20ya%20design." target="_blank" rel="noopener" class="btn btn-primary">Anza Project →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h5>JAMA Graphics</h5>
+      <p style="color:var(--muted);font-size:0.88rem;">Creative Design Studio inayotoa huduma za graphics design za kiwango cha kimataifa Tanzania.</p>
+      <div class="footer-social">
+        <a href="#" title="Instagram" aria-label="Instagram">📷</a>
+        <a href="#" title="Facebook" aria-label="Facebook">📘</a>
+        <a href="#" title="TikTok" aria-label="TikTok">🎵</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Huduma</h5>
+      <a href="#services">Poster Design</a>
+      <a href="#services">Logo Design</a>
+      <a href="#services">Business Card</a>
+      <a href="#services">Website Design</a>
+    </div>
+    <div class="footer-col">
+      <h5>Kurasa</h5>
+      <a href="#home">Nyumbani</a>
+      <a href="#about">Kuhusu</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#contact">Wasiliana</a>
+    </div>
+    <div class="footer-col">
+      <h5>Mawasiliano</h5>
+      <a href="tel:0753308928">📞 0753 308 928</a>
+      <a href="mailto:wwwsjuma2@gmail.com">✉️ wwwsjuma2@gmail.com</a>
+      <a href="#contact">📍 Tanzania</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© <span id="year"></span> <span>JAMA Graphics</span>. Haki zote zimehifadhiwa.</div>
+    <div>Ubunifu wa Kiwango cha Juu ✨</div>
+  </div>
+</footer>
+
+<!-- ===== WHATSAPP FLOAT ===== -->
+<a href="https://wa.me/255753308928?text=Habari%20JAMA%20Graphics!%20Nahitaji%20huduma%20ya%20design."
+   target="_blank" rel="noopener"
+   class="wa-float" aria-label="Wasiliana WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- ===== BACK TO TOP ===== -->
+<button class="back-top" id="backTop" aria-label="Rudi juu">↑</button>
+
+<!-- ===== LIGHTBOX ===== -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Funga">×</button>
+  <img src="" alt="Preview" id="lightboxImg">
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  // ===== CONFIG =====
+  const CFG = { storage: 'jama_site_v1' };
+
+  // ===== PRELOADER =====
+  window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('preloader').classList.add('hidden'), 800);
+  });
+
+  // ===== YEAR =====
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ===== CUSTOM CURSOR =====
+  const cursor = document.getElementById('cursor');
+  const follower = document.getElementById('cursorFollower');
+  if (cursor && window.innerWidth > 768) {
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      setTimeout(() => {
+        follower.style.left = e.clientX + 'px';
+        follower.style.top = e.clientY + 'px';
+      }, 80);
+    });
+    document.querySelectorAll('a, button, .portfolio-item, .service-card, .filter-btn').forEach(el => {
+      el.addEventListener('mouseenter', () => follower.classList.add('hovering'));
+      el.addEventListener('mouseleave', () => follower.classList.remove('hovering'));
+    });
+  }
+
+  // ===== SCROLL PROGRESS =====
+  const scrollProgress = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    scrollProgress.style.width = (window.scrollY / h) * 100 + '%';
+  });
+
+  // ===== NAVBAR SCROLL =====
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+
+  // ===== MOBILE MENU =====
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // ===== THEME TOGGLE =====
+  const themeToggle = document.getElementById('themeToggle');
+  const savedTheme = localStorage.getItem(CFG.storage + '_theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  themeToggle.textContent = savedTheme === 'light' ? '☀️' : '🌙';
+  themeToggle.addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    themeToggle.textContent = next === 'light' ? '☀️' : '🌙';
+    localStorage.setItem(CFG.storage + '_theme', next);
+  });
+
+  // ===== PORTFOLIO =====
+  const portfolioData = [
+    { category: 'poster', src: 'images/poster1.jpg', label: 'Poster Design', title: 'Campaign Launch' },
+    { category: 'social', src: 'images/social1.jpg', label: 'Social Media', title: 'Instagram Story' },
+    { category: 'flyer', src: 'images/flyer1.jpg', label: 'Flyer Design', title: 'Event Promo' },
+    { category: 'card', src: 'images/card1.jpg', label: 'Business Card', title: 'Brand Card' },
+    { category: 'logo', src: 'images/logo1.jpg', label: 'Logo Design', title: 'Identity Mark' },
+    { category: 'website', src: 'images/website1.jpg', label: 'Website Design', title: 'Digital Presence' },
+    { category: 'poster', src: 'images/poster2.jpg', label: 'Poster Design', title: 'Concert Poster' },
+    { category: 'social', src: 'images/social2.jpg', label: 'Social Media', title: 'Product Teaser' },
+    { category: 'flyer', src: 'images/flyer2.jpg', label: 'Flyer Design', title: 'Retail Campaign' },
+    { category: 'poster', src: 'images/poster3.jpg', label: 'Poster Design', title: 'Education Poster' },
+    { category: 'social', src: 'images/social3.jpg', label: 'Social Media', title: 'Brand Boost' },
+    { category: 'logo', src: 'images/logo2.jpg', label: 'Logo Design', title: 'Monogram Logo' },
+    { category: 'website', src: 'images/website1.jpg', label: 'Website Design', title: 'Landing Page' },
+    { category: 'poster', src: 'images/poster4.jpg', label: 'Poster Design', title: 'Event Art' },
+    { category: 'social', src: 'images/social4.jpg', label: 'Social Media', title: 'Marketing Post' },
+    { category: 'flyer', src: 'images/flyer3.jpg', label: 'Flyer Design', title: 'Promo Flyer' },
+    { category: 'card', src: 'images/card2.jpg', label: 'Business Card', title: 'Luxury Card' },
+    { category: 'logo', src: 'images/logo3.jpg', label: 'Logo Design', title: 'Minimal Icon' },
+    { category: 'poster', src: 'images/poster5.jpg', label: 'Poster Design', title: 'Awareness Poster' },
+    { category: 'social', src: 'images/social5.jpg', label: 'Social Media', title: 'Campaign Visual' },
+    { category: 'flyer', src: 'images/flyer4.jpg', label: 'Flyer Design', title: 'Product Flyer' },
+    { category: 'poster', src: 'images/poster6.jpg', label: 'Poster Design', title: 'Annual Poster' },
+    { category: 'social', src: 'images/social6.jpg', label: 'Social Media', title: 'Launch Post' },
+    { category: 'flyer', src: 'images/flyer5.jpg', label: 'Flyer Design', title: 'Business Flyer' }
+  ];
+
+  const portfolioGrid = document.getElementById('portfolioGrid');
+  portfolioGrid.innerHTML = portfolioData.map((item, index) => `
+    <div class="portfolio-item" data-category="${item.category}" data-index="${index}">
+      <img src="${item.src}" alt="${item.title}" loading="lazy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%23161616%22 width=%22400%22 height=%22500%22/><text x=%22200%22 y=%22250%22 fill=%22%23d4af37%22 font-family=%22sans-serif%22 font-size=%2224%22 text-anchor=%22middle%22>${item.label}</text></svg>'">
+      <div class="portfolio-overlay">
+        <span>${item.label}</span>
+        <h4>${item.title}</h4>
+      </div>
+    </div>
+  `).join('');
+
+  // Filters
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const items = document.querySelectorAll('.portfolio-item');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      items.forEach(item => {
+        const match = filter === 'all' || item.dataset.category === filter;
+        item.classList.toggle('hidden', !match);
+        if (match) item.style.animation = 'zoomIn 0.5s ease';
+      });
+    });
+  });
+
+  // Lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxClose = document.getElementById('lightboxClose');
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      const img = item.querySelector('img');
+      lightboxImg.src = img.src;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  const closeLightbox = () => {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  // ===== REVEAL ON SCROLL =====
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // ===== COUNTER ANIMATION =====
+  const counters = document.querySelectorAll('[data-count]');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.count);
+        let current = 0;
+        const step = target / 50;
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) { current = target; clearInterval(timer); }
+          el.textContent = Math.floor(current) + (el.textContent.includes('+') ? '+' : '');
+        }, 30);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(el => counterObserver.observe(el));
+
+  // ===== BACK TO TOP =====
+  const backTop = document.getElementById('backTop');
+  window.addEventListener('scroll', () => backTop.classList.toggle('show', window.scrollY > 500));
+  backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+})();
+</script>
+
+</body>
+<!-- ============================================================
+     JAMA GRAPHICS — ULTRA PRO v4.0
+     Gallery • Rating • Email • Video • Calculator • PDF
+     Referral • Portal • Wizard • Testimonials • Loyalty
+     ============================================================ -->
+
+<style>
+  :root {
+    --jg-gold: #d4af37;
+    --jg-gold-light: #f4d03f;
+    --jg-gold-dark: #a88a2b;
+    --jg-dark: #080808;
+    --jg-dark-2: #0f0f0f;
+    --jg-dark-3: #161616;
+    --jg-dark-4: #1e1e1e;
+    --jg-text: #f5f5f5;
+    --jg-muted: #8a8a8a;
+    --jg-wa: #25D366;
+    --jg-wa-dark: #128C7E;
+    --jg-border: rgba(212, 175, 55, 0.2);
+    --jg-success: #27ae60;
+    --jg-error: #e74c3c;
+    --jg-info: #3498db;
+    --jg-purple: #9b59b6;
+  }
+  .jg-light-theme {
+    --jg-dark: #ffffff;
+    --jg-dark-2: #f8f8f8;
+    --jg-dark-3: #f0f0f0;
+    --jg-dark-4: #e8e8e8;
+    --jg-text: #1a1a1a;
+    --jg-muted: #666;
+    --jg-border: rgba(212, 175, 55, 0.35);
+  }
+
+  /* ===== FLOATING BUTTONS ===== */
+  .jg-float {
+    position: fixed;
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    font-size: 1.7rem;
+  }
+  .jg-float:hover { transform: scale(1.12) rotate(-5deg); }
+  .jg-float:active { transform: scale(0.95); }
+
+  .jg-chat-btn {
+    bottom: 25px; right: 25px;
+    background: linear-gradient(135deg, var(--jg-gold), var(--jg-gold-light));
+    color: var(--jg-dark);
+  }
+  .jg-wa-btn {
+    bottom: 25px; left: 25px;
+    background: var(--jg-wa);
+    text-decoration: none;
+  }
+  .jg-wa-btn svg { width: 34px; height: 34px; fill: white; }
+  .jg-wa-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid var(--jg-wa);
+    animation: jgRipple 2s infinite;
+  }
+  @keyframes jgRipple {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.6); opacity: 0; }
+  }
+
+  .jg-badge {
+    position: absolute;
+    top: -3px; right: -3px;
+    min-width: 22px; height: 22px;
+    padding: 0 6px;
+    background: var(--jg-error);
+    color: white;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--jg-dark);
+    animation: jgPulse 2s infinite;
+  }
+  @keyframes jgPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+
+  /* ===== CHAT WINDOW ===== */
+  .jg-window {
+    position: fixed;
+    bottom: 105px; right: 25px;
+    width: 420px;
+    max-width: calc(100vw - 40px);
+    height: 680px;
+    max-height: calc(100vh - 130px);
+    background: var(--jg-dark-2);
+    border: 1px solid var(--jg-border);
+    border-radius: 26px;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+    font-family: 'Inter', sans-serif;
+    color: var(--jg-text);
+  }
+  .jg-window.open {
+    display: flex;
+    animation: jgSlideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes jgSlideUp {
+    from { opacity: 0; transform: translateY(40px) scale(0.94); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* ===== HEADER ===== */
+  .jg-header {
+    background: linear-gradient(135deg, var(--jg-gold), var(--jg-gold-light));
+    color: #0a0a0a;
+    padding: 13px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .jg-header::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -20%;
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, rgba(255,255,255,0.35), transparent 70%);
+    pointer-events: none;
+  }
+
+  .jg-brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    position: relative;
+    z-index: 1;
+  }
+  .jg-avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: #0a0a0a;
+    color: var(--jg-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.2rem;
+    font-family: 'Syne', sans-serif;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .jg-avatar::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 11px; height: 11px;
+    background: var(--jg-success);
+    border: 2px solid var(--jg-gold);
+    border-radius: 50%;
+    animation: jgPulse 2s infinite;
+  }
+  .jg-brand-info h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+  }
+  .jg-brand-info small {
+    font-size: 0.7rem;
+    font-weight: 500;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .jg-brand-info small::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--jg-success);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .jg-tools {
+    display: flex;
+    gap: 3px;
+    position: relative;
+    z-index: 1;
+  }
+  .jg-tool {
+    background: rgba(0,0,0,0.1);
+    border: none;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s;
+    font-size: 0.9rem;
+  }
+  .jg-tool:hover { background: rgba(0,0,0,0.22); transform: scale(1.08); }
+  .jg-tool.active { background: #0a0a0a; color: var(--jg-gold); }
+
+  /* ===== LANGUAGE BAR ===== */
+  .jg-lang-bar {
+    display: flex;
+    background: var(--jg-dark-3);
+    border-bottom: 1px solid var(--jg-border);
+    flex-shrink: 0;
+  }
+  .jg-lang-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 10px;
+    color: var(--jg-muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    position: relative;
+  }
+  .jg-lang-btn:hover { color: var(--jg-text); }
+  .jg-lang-btn.active { color: var(--jg-gold); background: rgba(212, 175, 55, 0.08); }
+  .jg-lang-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 20%; right: 20%;
+    height: 2px;
+    background: var(--jg-gold);
+    border-radius: 2px;
+  }
+
+  /* ===== MESSAGES ===== */
+  .jg-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--jg-dark);
+    scrollbar-width: thin;
+    scrollbar-color: var(--jg-gold) transparent;
+  }
+  .jg-messages::-webkit-scrollbar { width: 5px; }
+  .jg-messages::-webkit-scrollbar-thumb {
+    background: rgba(212, 175, 55, 0.4);
+    border-radius: 10px;
+  }
+
+  .jg-msg {
+    max-width: 86%;
+    padding: 11px 15px;
+    border-radius: 16px;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    animation: jgMsgIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    word-wrap: break-word;
+    position: relative;
+  }
+  @keyframes jgMsgIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .jg-msg.bot {
+    background: var(--jg-dark-3);
+    color: var(--jg-text);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+  }
+  .jg-msg.user {
+    background: linear-gradient(135deg, var(--jg-gold), var(--jg-gold-light));
+    color: #0a0a0a;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+    font-weight: 500;
+  }
+  .jg-msg a {
+    color: var(--jg-wa);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 1px dashed currentColor;
+  }
+  .jg-msg.user a { color: #0a0a0a; }
+  .jg-msg strong { color: var(--jg-gold); }
+  .jg-msg.user strong { color: #0a0a0a; }
+
+  .jg-msg-meta {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+    font-size: 0.65rem;
+    opacity: 0.55;
+    margin-top: 5px;
+  }
+  .jg-ticks { color: var(--jg-info); font-weight: 700; letter-spacing: -2px; }
+  .jg-msg.user .jg-ticks { color: #0a0a0a; }
+
+  /* ===== GALLERY ===== */
+  .jg-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .jg-gallery-item {
+    aspect-ratio: 1;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--jg-dark-4);
+    cursor: pointer;
+    position: relative;
+    border: 1px solid var(--jg-border);
+    transition: all 0.3s;
+  }
+  .jg-gallery-item:hover {
+    transform: scale(1.05);
+    border-color: var(--jg-gold);
+    z-index: 2;
+  }
+  .jg-gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .jg-gallery-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    color: white;
+    padding: 15px 8px 6px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  /* ===== RATING ===== */
+  .jg-rating {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 12px;
+    padding: 12px;
+    background: var(--jg-dark-4);
+    border-radius: 12px;
+    border: 1px solid var(--jg-border);
+  }
+  .jg-star {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--jg-dark-4);
+    transition: all 0.2s;
+    padding: 0;
+    line-height: 1;
+  }
+  .jg-star:hover,
+  .jg-star.active {
+    color: var(--jg-gold);
+    transform: scale(1.15);
+  }
+  .jg-star.active { filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6)); }
+
+  /* ===== PRODUCTS ===== */
+  .jg-products {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .jg-product {
+    background: var(--jg-dark-2);
+    border: 1px solid var(--jg-border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
+  }
+  .jg-product:hover {
+    border-color: var(--jg-gold);
+    background: var(--jg-dark-3);
+    transform: translateX(3px);
+  }
+  .jg-product-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+  }
+  .jg-product-icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid var(--jg-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    flex-shrink: 0;
+  }
+  .jg-product-text { flex: 1; min-width: 0; }
+  .jg-product-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .jg-product-price {
+    font-size: 0.75rem;
+    color: var(--jg-gold);
+    font-weight: 700;
+  }
+  .jg-product-add {
+    background: linear-gradient(135deg, var(--jg-gold), var(--jg-gold-light));
+    border: none;
+    color: #0a0a0a;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.15rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    flex-shrink: 0;
+  }
+  .jg-product-add:hover { transform: scale(1.15); }
+  .jg-product-add.added {
+    background: var(--jg-success);
+    color: white;
+    font-size: 0.85rem;
+  }
+
+  /* ===== CALCULATOR ===== */
+  .jg-calc {
+    background: var(--jg-dark-2);
+    border: 1px solid var(--jg-border);
+    border-radius: 14px;
+    padding: 16px;
+    margin-top: 10px;
+  }
+  .jg-calc-row { margin-bottom: 14px; }
+  .jg-calc-row:last-child { margin-bottom: 0; }
+  .jg-calc-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    color: var(--jg-muted);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .jg-calc-label span:last-child {
+    color: var(--jg-gold);
+    font-weight: 700;
+    font-family: 'Syne', sans-serif;
+  }
+  .jg-calc-slider {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: var(--jg-dark-4);
+    border-radius: 3px;
+    outline: none;
+  }
+  .jg-calc-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px; height: 20px;
+    background: linear-gradient(135deg, var(--jg-gold), var(--jg-gold-light));
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(212, 175, 55, 0.5);
+    transition: transform 0.2s;
+  }
+  .jg-calc-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+  .jg-calc-slider::-moz-range-thumb {
+    width: 20px; height: 20px;
+    background: linear-gradient(135deg, var(--jg-gold), var(--jg-gold-light));
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+  }
+  .jg-calc-total {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
+    border: 1px solid var(--jg-gold);
+    border-radius: 12px;
+    padding: 14px;
+    text-align: center;
+    margin-top: 14px;
+  }
+  .jg-calc-total small {
+    display: block;
+    color: var(--jg-muted);
+    font-size: 0.72rem;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  .jg-calc-total strong {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    color: var(--jg-gold);
+    font-weight: 800;
+  }
+
+  /* ===== QUOTE ===== */
+  .jg-quote {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(212, 175, 55, 0.04));
+    border: 1px solid var(--jg-gold);
+    border-radius: 14px;
+    padding: 15px;
+    margin-top: 8px;
+  }
+  .jg-quote-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    color: var(--jg-gold);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .jg-quote-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 0.82rem;
+    border-bottom: 1px dashed rgba(212, 175, 55, 0.2);
+  }
+  .jg-quote-item:last-of-type { border-bottom: none; }
+  .jg-quote-total {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    margin-top: 10px;
+    border-top: 2px solid var(--jg-gold);
+    font-weight: 800;
+    color: var(--jg-gold);
+    font-size: 1rem;
+    font-family: 'Syne', sans-serif;
+  }
+
+  /* ===== BOOKING FORM ===== */
+  .jg-booking {
+    background: var(--jg-dark-2);
+    border: 1px solid var(--jg-border);
+    border-radius: 14px;
+    padding: 15px;
+    margin-top: 8px;
+  }
+  .jg-booking-row { margin-bottom: 10px; }
+  .jg-booking-row label {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--jg-muted);
+    margin-bottom: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .jg-booking-row input,
+  .jg-booking-row select,
+  .jg-booking-row textarea {
+    width: 100%;
+    background: var(--jg-dark-3);
+    border: 1px solid var(--jg-border);
+    color: var(--jg-text);
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: border-color 0.3s;
+    resize: vertical;
+  }
+  .jg-booking-row input:focus,
+  .jg-booking-row select:focus,
+  .jg-booking-row textarea:focus { border-color: var(--jg-gold); }
+
+  .jg-booking-submit {
+    width: 100%;
+    background: linear-gradient(135deg, var(--jg-gold), var(--jg-gold-light));
+    color: #0a0a0a;
+    border: none;
+    padding: 12px;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Inter', sans-serif;
+    margin-top: 5px;
+  }
+  .jg-booking-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4); }
+
+  /* ===== WIZARD STEPS ===== */
+  .jg-wizard {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 0;
+    background: var(--jg-dark-4);
+    border-radius: 100px;
+    margin-top: 10px;
+  }
+  .jg-step {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 100px;
+    background: var(--jg-dark-3);
+    font-size: 0.72rem;
+    color: var(--jg-muted);
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+  .jg-step.active {
+    background: var(--jg-gold);
+    color: #0a0a0a;
+  }
+  .jg-step.done {
+    background: var(--jg-success);
+    color: white;
+  }
+  .jg-step-num {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.68rem;
+    font-weight: 700;
+  }
+  .jg-step.active .jg-step-num,
+  .jg-step.done .jg-step-num { background: rgba(0,0,0,0.25); color: white; }
+
+  /* ===== TESTIMONIALS ===== */
+  .jg-testi {
+    background: var(--jg-dark-2);
+    border: 1px solid var(--jg-border);
+    border-radius: 14px;
+    padding: 15px;
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  .jg-testi::before {
+    content: '"';
+    position: absolute;
+    top: -10px; left: 10px;
+    font-size: 5rem;
+    color: rgba(212, 175, 55, 0.15);
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+  .jg-testi-stars {
+    color: var(--jg-gold);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .jg-testi-text {
+    font-size: 0.82rem;
+    line-height: 1.55;
+    font-style: italic;
+    margin-bottom: 10px;
+    color: var(--jg-text);
+    position: relative;
+    z-index: 1;
+  }
+  .jg-testi-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .jg-testi-avatar {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--jg-gold), var(--jg-gold-light));
+    color: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.9rem;
+    font-family: 'Syne', sans-serif;
+  }
+  .jg-testi-name {
+    font-weight: 700;
+    font-size: 0.82rem;
+  }
+  .jg-testi-role {
+    font-size: 0.7rem;
+    color: var(--jg-muted);
+  }
+
+  /* ===== BEFORE/AFTER SLIDER ===== */
+  .jg-ba {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 10px;
+    cursor: ew-resize;
+    user-select: none;
+    aspect-ratio: 16/10;
+    background: var(--jg-dark-4);
+  }
+  .jg-ba img {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+  .jg-ba-after { clip-path: inset(0 50% 0 0); }
+  .jg-ba-line {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 50%;
+    width: 3px;
+    background: var(--jg-gold);
+    transform: translateX(-50%);
+    pointer-events: none;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
+  }
+  .jg-ba-line::after {
+    content: '⇄';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 34px; height: 34px;
+    background: var(--jg-gold);
+    color: #0a0a0a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  .jg-ba-label {
+    position: absolute;
+    top: 10px;
+    padding: 4px 10px;
+    background: rgba(0,0,0,0.75);
+    color: white;
+    font-size: 0.68rem;
+    border-radius: 100px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .jg-ba-label.before { left: 10px; }
+  .jg-ba-label.after { right: 10px; }
+
+  /* ===== LOYALTY ===== */
+  .jg-loyalty {
+    background: linear-gradient(135deg, var(--jg-purple), #6c3483);
+    border-radius: 14px;
+    padding: 15px;
+    margin-top: 10px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .jg-loyalty-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+  .jg-loyalty-info h5 {
+    margin: 0 0 2px;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+  }
+  .jg-loyalty-info p {
+    margin: 0;
+    font-size: 0.75rem;
+    opacity: 0.9;
+  }
+  .jg-loyalty-points {
+    margin-left: auto;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+  }
+
+  /* ===== TYPING ===== */
+  .jg-typing {
+    background: var(--jg-dark-3);
+    padding: 14px 18px;
+    border-radius: 16px;
+    border-bottom-left-radius: 4px;
+    align-self: flex-start;
+    display: flex;
+    gap: 5px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+  }
+  .jg-typing span {
+    width: 7px; height: 7px;
+    background: var(--jg-gold);
+    border-radius: 50%;
+    animation: jgTyping 1.4s infinite;
+  }
+  .jg-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .jg-typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes jgTyping {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-6px); opacity: 1; }
+  }
+
+  /* ===== CHIPS ===== */
+  .jg-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .jg-chips button {
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--jg-gold);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 5px 12px;
+    border-radius: 100px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s;
+    font-family: 'Inter', sans-serif;
+  }
+  .jg-chips button:hover {
+    background: var(--jg-gold);
+    color: #0a0a0a;
+    transform: translateY(-2px);
+  }
+
+  /* ===== ACTION BUTTONS ===== */
+  .jg-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .jg-action {
+    flex: 1;
+    min-width: 120px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--jg-border);
+    background: var(--jg-dark-3);
+    color: var(--jg-text);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .jg-action:hover {
+    border-color: var(--jg-gold);
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--jg-gold);
+    transform: translateY(-2px);
+  }
+  .jg-action.primary {
+    background: linear-gradient(135deg, var(--jg-gold), var(--jg-gold-light));
+    color: #0a0a0a;
+    border: none;
+  }
+  .jg-action.primary:hover { color: #0a0a0a; }
+
+  /* ===== WHATSAPP CTA ===== */
+  .jg-wa-cta {
+    background: linear-gradient(135deg, var(--jg-wa), var(--jg-wa-dark));
+    color: white !important;
+    padding: 13px 18px;
+    border-radius: 14px;
+    text-align: center;
+    text-decoration: none !important;
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 6px 0;
+    transition: all 0.3s;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+    border: none !important;
+  }
+  .jg-wa-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5); }
+  .jg-wa-cta svg { width: 18px; height: 18px; fill: white; }
+
+  /* ===== QUICK BAR ===== */
+  .jg-quick-bar {
+    display: flex;
+    gap: 6px;
+    padding: 10px 14px;
+    overflow-x: auto;
+    background: var(--jg-dark-2);
+    border-top: 1px solid rgba(212, 175, 55, 0.08);
+    scrollbar-width: none;
+    flex-shrink: 0;
+  }
+  .jg-quick-bar::-webkit-scrollbar { display: none; }
+  .jg-quick-bar button {
+    background: var(--jg-dark-3);
+    color: var(--jg-gold);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    padding: 7px 14px;
+    border-radius: 100px;
+    font-size: 0.74rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+    font-family: 'Inter', sans-serif;
+    flex-shrink: 0;
+  }
+  .jg-quick-bar button:hover {
+    background: var(--jg-gold);
+    color: #0a0a0a;
+    border-color: var(--jg-gold);
+  }
+
+  /* ===== INPUT ===== */
+  .jg-input-wrap {
+    display: flex;
+    padding: 12px 14px;
+    border-top: 1px solid var(--jg-border);
+    background: var(--jg-dark-2);
+    gap: 8px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .jg-input-btn {
+    background: transparent;
+    border: 1px solid var(--jg-border);
+    color: var(--jg-gold);
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    flex-shrink: 0;
+  }
+  .jg-input-btn:hover {
+    background: var(--jg-gold);
+    color: #0a0a0a;
+    transform: scale(1.05);
+  }
+  .jg-input-btn.recording {
+    background: var(--jg-error);
+    color: white;
+    border-color: var(--jg-error);
+    animation: jgPulse 1s infinite;
+  }
+  .jg-input {
+    flex: 1;
+    background: var(--jg-dark-3);
+    border: 1px solid var(--jg-border);
+    color: var(--jg-text);
+    padding: 12px 18px;
+    border-radius: 100px;
+    outline: none;
+    font-size: 0.88rem;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s;
+    min-width: 0;
+  }
+  .jg-input:focus { border-color: var(--jg-gold); background: var(--jg-dark-2); }
+  .jg-input::placeholder { color: var(--jg-muted); }
+  .jg-send {
+    background: linear-gradient(135deg, var(--jg-gold), var(--jg-gold-light));
+    border: none;
+    color: #0a0a0a;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    flex-shrink: 0;
+    font-weight: 700;
+  }
+  .jg-send:hover { transform: scale(1.08); box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5); }
+
+  /* ===== PALETTE ===== */
+  .jg-palette {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    backdrop-filter: blur(10px);
+    display: none;
+    flex-direction: column;
+    padding: 30px 20px;
+    z-index: 100;
+    animation: jgFadeIn 0.2s;
+  }
+  .jg-palette.open { display: flex; }
+  @keyframes jgFadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .jg-palette-title {
+    color: var(--jg-gold);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .jg-palette-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .jg-palette-item {
+    background: var(--jg-dark-2);
+    border: 1px solid var(--jg-border);
+    padding: 12px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.25s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--jg-text);
+    font-size: 0.85rem;
+  }
+  .jg-palette-item:hover {
+    border-color: var(--jg-gold);
+    background: var(--jg-dark-3);
+    transform: translateX(5px);
+  }
+  .jg-palette-item-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: rgba(212, 175, 55, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* ===== POPUP ===== */
+  .jg-popup {
+    position: fixed;
+    bottom: 105px; right: 25px;
+    width: 360px;
+    max-width: calc(100vw - 40px);
+    background: var(--jg-dark-2);
+    border: 1px solid var(--jg-border);
+    border-radius: 22px;
+    padding: 22px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7);
+    z-index: 998;
+    display: none;
+    font-family: 'Inter', sans-serif;
+    color: var(--jg-text);
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .jg-popup.show { display: block; opacity: 1; transform: translateY(0) scale(1); }
+  .jg-popup-close {
+    position: absolute;
+    top: 12px; right: 12px;
+    background: var(--jg-dark-3);
+    border: none;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    color: var(--jg-muted);
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .jg-popup-close:hover { background: rgba(212, 175, 55, 0.2); color: var(--jg-gold); }
+  .jg-popup-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .jg-popup-avatar {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--jg-gold), var(--jg-gold-light));
+    color: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.3rem;
+    font-family: 'Syne', sans-serif;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .jg-popup-avatar::after {
+    content: '';
+    position: absolute;
+    bottom: 2px; right: 2px;
+    width: 12px; height: 12px;
+    background: var(--jg-success);
+    border: 2px solid var(--jg-dark-2);
+    border-radius: 50%;
+  }
+  .jg-popup-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  .jg-popup-subtitle { font-size: 0.75rem; color: var(--jg-muted); margin-top: 2px; }
+  .jg-popup-msg { font-size: 0.9rem; line-height: 1.55; margin-bottom: 16px; }
+  .jg-popup-msg strong { color: var(--jg-gold); }
+  .jg-popup-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 100px;
+    background: linear-gradient(135deg, var(--jg-gold), var(--jg-gold-light));
+    color: #0a0a0a;
+    border: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Inter', sans-serif;
+  }
+  .jg-popup-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4); }
+
+  /* ===== LIGHTBOX ===== */
+  .jg-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+  }
+  .jg-lightbox.open { display: flex; animation: jgFadeIn 0.3s; }
+  .jg-lightbox img {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 12px;
+  }
+  .jg-lightbox-close {
+    position: absolute;
+    top: 20px; right: 25px;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    font-size: 1.6rem;
+    width: 45px; height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+  }
+  .jg-lightbox-close:hover { background: var(--jg-gold); color: #0a0a0a; }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 480px) {
+    .jg-float { width: 56px; height: 56px; bottom: 18px; }
+    .jg-chat-btn { right: 18px; font-size: 1.5rem; }
+    .jg-wa-btn { left: 18px; }
+    .jg-wa-btn svg { width: 28px; height: 28px; }
+    .jg-window {
+      bottom: 0; right: 0; left: 0; top: 0;
+      width: 100%; height: 100%;
+      max-height: 100%;
+      border-radius: 0; border: none;
+    }
+    .jg-popup { bottom: 88px; right: 12px; left: 12px; width: auto; }
+  }
+</style>
+
+<!-- ===== FLOATING BUTTONS ===== -->
+<button class="jg-float jg-chat-btn" id="jgChatBtn" aria-label="Chat">
+  💬
+  <span class="jg-badge" id="jgBadge">1</span>
+</button>
+
+<a href="https://wa.me/255753308928?text=Habari%20JAMA%20Graphics!%20Nahitaji%20huduma%20ya%20design."
+   target="_blank" rel="noopener"
+   class="jg-float jg-wa-btn" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- ===== POPUP ===== -->
+<div class="jg-popup" id="jgPopup">
+  <button class="jg-popup-close" id="jgPopupClose">×</button>
+  <div class="jg-popup-header">
+    <div class="jg-popup-avatar">J</div>
+    <div>
+      <h3 class="jg-popup-title" id="jgPopupTitle">JAMA Graphics</h3>
+      <div class="jg-popup-subtitle" id="jgPopupSubtitle">● Online sasa</div>
+    </div>
+  </div>
+  <p class="jg-popup-msg" id="jgPopupMsg"></p>
+  <button class="jg-popup-btn" id="jgPopupStart">Anza Mazungumzo →</button>
+</div>
+
+<!-- ===== CHAT WINDOW ===== -->
+<div class="jg-window" id="jgWindow">
+  <div class="jg-header">
+    <div class="jg-brand">
+      <div class="jg-avatar">J</div>
+      <div class="jg-brand-info">
+        <h4>JAMA Graphics</h4>
+        <small id="jgStatus">Online — Tunajibu papo hapo</small>
+      </div>
+    </div>
+    <div class="jg-tools">
+      <button class="jg-tool" id="jgPaletteBtn" title="Commands (Ctrl+K)">⌘</button>
+      <button class="jg-tool" id="jgSoundBtn" title="Sauti">🔔</button>
+      <button class="jg-tool" id="jgThemeBtn" title="Theme">🌙</button>
+      <button class="jg-tool" id="jgCloseBtn" title="Funga">×</button>
+    </div>
+  </div>
+
+  <div class="jg-lang-bar">
+    <button class="jg-lang-btn active" data-lang="sw">🇹🇿 Kiswahili</button>
+    <button class="jg-lang-btn" data-lang="en">🇬🇧 English</button>
+  </div>
+
+  <div class="jg-messages" id="jgMessages" role="log" aria-live="polite"></div>
+
+  <div class="jg-quick-bar" id="jgQuickBar"></div>
+
+  <div class="jg-input-wrap">
+    <button class="jg-input-btn" id="jgVoiceBtn" title="Ongea">🎤</button>
+    <input type="text" class="jg-input" id="jgInput" placeholder="Andika swali lako..." autocomplete="off">
+    <button class="jg-send" id="jgSendBtn">➤</button>
+  </div>
+
+  <div class="jg-palette" id="jgPalette">
+    <div class="jg-palette-title">⌘ Amri za Haraka</div>
+    <div class="jg-palette-list" id="jgPaletteList"></div>
+  </div>
+</div>
+
+<!-- ===== LIGHTBOX ===== -->
+<div class="jg-lightbox" id="jgLightbox">
+  <button class="jg-lightbox-close" id="jgLightboxClose">×</button>
+  <img src="" alt="Preview" id="jgLightboxImg">
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ==========================================================
+  // CONFIG
+  // ==========================================================
+  const CFG = {
+    brand: 'JAMA Graphics',
+    wa: '255753308928',
+    phone: '0753 308 928',
+    email: 'wwwsjuma2@gmail.com',
+    formspree: 'https://formspree.io/f/xbgdrnkd',
+    storage: 'jama_v4',
+    popupDelay: 10000,
+    typingSpeed: [500, 1200],
+    tz: Intl.DateTimeFormat().resolvedOptions().timeZone
+  };
+
+  // ==========================================================
+  // STATE
+  // ==========================================================
+  let state = {
+    lang: localStorage.getItem(CFG.storage + '_lang') || 'sw',
+    sound: localStorage.getItem(CFG.storage + '_sound') !== 'off',
+    theme: localStorage.getItem(CFG.storage + '_theme') || 'dark',
+    history: [],
+    cart: [],
+    referrals: JSON.parse(localStorage.getItem(CFG.storage + '_ref') || '{}'),
+    myRef: localStorage.getItem(CFG.storage + '_myref') || generateRef(),
+    loyalty: parseInt(localStorage.getItem(CFG.storage + '_loyalty') || '0'),
+    analytics: JSON.parse(localStorage.getItem(CFG.storage + '_stats') || '{"questions":{},"sessions":0,"quotes":0,"bookings":0,"ratings":[]}'),
+    wizardStep: 0,
+    wizardData: {}
+  };
+
+  function generateRef() {
+    const code = 'JAMA-' + Math.random().toString(36).substring(2, 7).toUpperCase();
+    localStorage.setItem(CFG.storage + '_myref', code);
+    return code;
+  }
+
+  // ==========================================================
+  // I18N
+  // ==========================================================
+  const I18N = {
+    sw: {
+      status: 'Online — Tunajibu papo hapo',
+      placeholder: 'Andika swali lako...',
+      popupTitle: 'Karibu JAMA Graphics! 🎨',
+      popupMsg: 'Habari! 👋 Naweza kukusaidia na <strong>logo, poster, flyer, business card</strong> au <strong>website</strong>?<br><br>Bonyeza hapa chini kuanza.',
+      popupBtn: 'Anza Mazungumzo →',
+      welcome: "Karibu **JAMA Graphics**! 🎨\n\nMimi ni **JAMA AI** — msaidizi wako wa kibunifu.\n\nNinaweza kukusaidia na:\n• 💰 Bei za huduma\n• 🎨 Kutengeneza quote\n• 📸 Kuona portfolio\n• 📅 Kuweka appointment\n• 🎬 Video call\n• 💼 Kufuatilia project\n\nUliza swali lolote, au chagua hapa chini.",
+      quickReplies: ['Bei za logo?', 'Nataka quote', 'Onyesha kazi zako', 'Weka appointment', 'Rating 5-star'],
+      notFound: "Samahani, sijaelewa vizuri. 🤔\n\nUnaweza kuuliza kuhusu **bei, huduma, muda, portfolio, au booking**. Au chagua hapa chini.",
+      whatsappCta: 'Endelea kwenye WhatsApp',
+      clearConfirm: 'Una uhakika unataka kufuta mazungumzo yote?',
+      cleared: 'Mazungumzo yamefutwa. Karibu tena! 🎨',
+      commands: [
+        { id: 'quote', icon: '💰', label: 'Tengeneza Quote', cmd: 'quote' },
+        { id: 'calc', icon: '🎨', label: 'Calculator ya Bei', cmd: 'calc' },
+        { id: 'book', icon: '📅', label: 'Weka Appointment', cmd: 'book' },
+        { id: 'video', icon: '🎬', label: 'Video Call', cmd: 'video' },
+        { id: 'gallery', icon: '📸', label: 'Portfolio Yangu', cmd: 'gallery' },
+        { id: 'beforeafter', icon: '🖼️', label: 'Kabla/ Baada', cmd: 'beforeafter' },
+        { id: 'rate', icon: '🌟', label: 'Kadiria Huduma', cmd: 'rate' },
+        { id: 'ref', icon: '🏆', label: 'Referral Program', cmd: 'ref' },
+        { id: 'loyalty', icon: '💎', label: 'Loyalty Points', cmd: 'loyalty' },
+        { id: 'portal', icon: '💼', label: 'Client Portal', cmd: 'portal' },
+        { id: 'testi', icon: '⭐', label: 'Wateja Wanasema', cmd: 'testi' },
+        { id: 'human', icon: '💬', label: 'Zungumza na Mtu', cmd: 'human' },
+        { id: 'clear', icon: '🗑️', label: 'Futa Mazungumzo', cmd: 'clear' }
+      ]
+    },
+    en: {
+      status: 'Online — We reply instantly',
+      placeholder: 'Type your question...',
+      popupTitle: 'Welcome to JAMA Graphics! 🎨',
+      popupMsg: "Hello! 👋 Can I help you with <strong>logo, poster, flyer, business card</strong> or <strong>website</strong>?<br><br>Click below to start.",
+      popupBtn: 'Start Chat →',
+      welcome: "Welcome to **JAMA Graphics**! 🎨\n\nI'm **JAMA AI** — your creative assistant.\n\nI can help you with:\n• 💰 Service pricing\n• 🎨 Build a quote\n• 📸 View portfolio\n• 📅 Book appointment\n• 🎬 Video call\n• 💼 Track project\n\nAsk anything, or pick below.",
+      quickReplies: ['Logo pricing?', 'Build quote', 'Show portfolio', 'Book appointment', 'Give 5-star rating'],
+      notFound: "Sorry, I didn't quite get that. 🤔\n\nTry asking about **pricing, services, timing, portfolio, or booking**. Or pick below.",
+      whatsappCta: 'Continue on WhatsApp',
+      clearConfirm: 'Are you sure you want to clear all messages?',
+      cleared: 'Chat cleared. Welcome back! 🎨',
+      commands: [
+        { id: 'quote', icon: '💰', label: 'Build Quote', cmd: 'quote' },
+        { id: 'calc', icon: '🎨', label: 'Price Calculator', cmd: 'calc' },
+        { id: 'book', icon: '📅', label: 'Book Appointment', cmd: 'book' },
+        { id: 'video', icon: '🎬', label: 'Video Call', cmd: 'video' },
+        { id: 'gallery', icon: '📸', label: 'My Portfolio', cmd: 'gallery' },
+        { id: 'beforeafter', icon: '🖼️', label: 'Before/After', cmd: 'beforeafter' },
+        { id: 'rate', icon: '🌟', label: 'Rate Service', cmd: 'rate' },
+        { id: 'ref', icon: '🏆', label: 'Referral Program', cmd: 'ref' },
+        { id: 'loyalty', icon: '💎', label: 'Loyalty Points', cmd: 'loyalty' },
+        { id: 'portal', icon: '💼', label: 'Client Portal', cmd: 'portal' },
+        { id: 'testi', icon: '⭐', label: 'Testimonials', cmd: 'testi' },
+        { id: 'human', icon: '💬', label: 'Talk to Human', cmd: 'human' },
+        { id: 'clear', icon: '🗑️', label: 'Clear Chat', cmd: 'clear' }
+      ]
+    }
+  };
+
+  // ==========================================================
+  // PORTFOLIO IMAGES (Badilisha na picha zako!)
+  // ==========================================================
+  const PORTFOLIO = [
+    { src: 'images/logo1.jpg', title: { sw: 'Logo ya Biashara', en: 'Business Logo' }, cat: 'logo' },
+    { src: 'images/poster1.jpg', title: { sw: 'Poster ya Tukio', en: 'Event Poster' }, cat: 'poster' },
+    { src: 'images/social1.jpg', title: { sw: 'Social Media', en: 'Social Media' }, cat: 'social' },
+    { src: 'images/flyer1.jpg', title: { sw: 'Flyer ya Kampeni', en: 'Campaign Flyer' }, cat: 'flyer' },
+    { src: 'images/card1.jpg', title: { sw: 'Business Card', en: 'Business Card' }, cat: 'card' },
+    { src: 'images/website1.jpg', title: { sw: 'Website Design', en: 'Website Design' }, cat: 'web' }
+  ];
+
+  // ==========================================================
+  // PRODUCTS
+  // ==========================================================
+  const PRODUCTS = [
+    { id: 'logo',   icon: '✨', name: { sw: 'Logo Design',        en: 'Logo Design' },        price: 50000 },
+    { id: 'poster', icon: '🖼️', name: { sw: 'Poster Design',      en: 'Poster Design' },      price: 25000 },
+    { id: 'social', icon: '📱', name: { sw: 'Social Media Poster', en: 'Social Media Poster' },price: 15000 },
+    { id: 'flyer',  icon: '📄', name: { sw: 'Flyer Design',        en: 'Flyer Design' },       price: 30000 },
+    { id: 'card',   icon: '💳', name: { sw: 'Business Card',       en: 'Business Card' },      price: 40000 },
+    { id: 'web',    icon: '💻', name: { sw: 'Website Design',      en: 'Website Design' },     price: 500000 }
+  ];
+
+  // ==========================================================
+  // PROMO CODES
+  // ==========================================================
+  const PROMOS = {
+    'JAMA10': { discount: 10, msg: { sw: 'Punguzo la 10%', en: '10% discount' } },
+    'NEW20':  { discount: 20, msg: { sw: 'Punguzo la 20% kwa mteja mpya', en: '20% new customer' } },
+    'VIP30':  { discount: 30, msg: { sw: 'Punguzo la 30% VIP', en: '30% VIP discount' } }
+  };
+  let activePromo = null;
+
+  // ==========================================================
+  // TESTIMONIALS
+  // ==========================================================
+  const TESTIMONIALS = [
+    { name: 'Amina Hassan', role: { sw: 'Mmiliki, Duka la Nguo', en: 'Owner, Boutique' }, text: { sw: 'JAMA Graphics walitengeneza logo nzuri sana! Wateja wangu wote wanaipenda. Kazi ya haraka na ya kitaalamu.', en: 'JAMA Graphics made me an amazing logo! All my customers love it. Fast and professional work.' }, stars: 5 },
+    { name: 'David Mwakyusa', role: { sw: 'Mkurugenzi, Tech Startup', en: 'Director, Tech Startup' }, text: { sw: 'Website yetu ni ya kiwango cha kimataifa. Mauzo yameongezeka 40% baada ya kuanza kutumia huduma zao.', en: 'Our website is world-class. Sales increased 40% after using their services.' }, stars: 5 },
+    { name: 'Grace Kimaro', role: { sw: 'Msimamizi wa Matukio', en: 'Event Manager' }, text: { sw: 'Posters zao zinavutia sana. Kila tukio letu linapata wageni wengi kwa sababu ya matangazo yao.', en: 'Their posters are stunning. Every event gets more attendees thanks to their designs.' }, stars: 5 }
+  ];
+
+  // ==========================================================
+  // KNOWLEDGE BASE
+  // ==========================================================
+  const KB = [
+    {
+      kw: { sw: ['bei','ngapi','shilingi','malipo','gani','kiasi'], en: ['price','cost','how much','rate','fee'] },
+      answer: {
+        sw: "💰 **Bei zetu:**\n\n• ✨ Logo — TSh 50,000+\n• 🖼️ Poster — TSh 25,000+\n• 📱 Social Media — TSh 15,000+\n• 📄 Flyer — TSh 30,000+\n• 💳 Business Card — TSh 40,000+\n• 💻 Website — Kuanzia TSh 500,000\n\n💡 **Unataka nikukadirie?**",
+        en: "💰 **Our pricing:**\n\n• ✨ Logo — TSh 50,000+\n• 🖼️ Poster — TSh 25,000+\n• 📱 Social Media — TSh 15,000+\n• 📄 Flyer — TSh 30,000+\n• 💳 Business Card — TSh 40,000+\n• 💻 Website — From TSh 500,000\n\n💡 **Want an estimate?**"
+      },
+      chips: { sw: ['Tumia calculator','Nunua huduma','WhatsApp'], en: ['Use calculator','Buy service','WhatsApp'] }
+    },
+    {
+      kw: { sw: ['muda','siku','lini','kukamilika','haraka'], en: ['time','how long','deadline','fast','quick'] },
+      answer: {
+        sw: "⏱️ **Muda wa kazi:**\n\n• Logo: Siku 2-3\n• Poster/Flyer: Siku 1-2\n• Social Media: Saa 6-12\n• Business Card: Siku 1-2\n• Website: Wiki 1-3\n\n⚡ **Urgent** inapatikana kwa malipo ya ziada.",
+        en: "⏱️ **Turnaround time:**\n\n• Logo: 2-3 days\n• Poster/Flyer: 1-2 days\n• Social Media: 6-12 hours\n• Business Card: 1-2 days\n• Website: 1-3 weeks\n\n⚡ **Urgent** available for extra fee."
+      },
+      chips: { sw: ['Nataka haraka','WhatsApp'], en: ['I need it fast','WhatsApp'] }
+    },
+    {
+      kw: { sw: ['portfolio','kazi zako','kazi ulizofanya','mifano'], en: ['portfolio','your work','samples','examples'] },
+      answer: {
+        sw: "📸 **Hizi ni baadhi ya kazi zangu:**\n\nBonyeza picha yoyote kuiangalia kwa ukubwa zaidi.",
+        en: "📸 **Here are some of my works:**\n\nClick any image to view larger."
+      },
+      chips: { sw: ['Onyesha zote','WhatsApp'], en: ['Show all','WhatsApp'] },
+      gallery: true
+    },
+    {
+      kw: { sw: ['wasiliana','namba','simu','email','whatsapp','mawasiliano'], en: ['contact','phone','email','whatsapp','reach'] },
+      answer: {
+        sw: "📞 **Wasiliana nami:**\n\n📱 Simu/WhatsApp: " + CFG.phone + "\n✉️ Email: " + CFG.email + "\n\nAu bofya kitufe cha WhatsApp kushoto.",
+        en: "📞 **Contact me:**\n\n📱 Phone/WhatsApp: " + CFG.phone + "\n✉️ Email: " + CFG.email + "\n\nOr tap the WhatsApp button (left)."
+      },
+      chips: { sw: ['WhatsApp','Barua pepe'], en: ['WhatsApp','Email'] }
+    },
+    {
+      kw: { sw: ['huduma','unafanya','kazi gani','mnatoa'], en: ['services','what do you do','offerings'] },
+      answer: {
+        sw: "🎨 **Huduma zetu 6:**\n\n1️⃣ Logo Design\n2️⃣ Poster Design\n3️⃣ Social Media Poster\n4️⃣ Flyer Design\n5️⃣ Business Card\n6️⃣ Website Design\n\nUnahitaji ipi?",
+        en: "🎨 **Our 6 services:**\n\n1️⃣ Logo Design\n2️⃣ Poster Design\n3️⃣ Social Media Poster\n4️⃣ Flyer Design\n5️⃣ Business Card\n6️⃣ Website Design\n\nWhich one?"
+      },
+      chips: { sw: ['Nunua huduma','Nataka quote','WhatsApp'], en: ['Buy service','Build quote','WhatsApp'] }
+    },
+    {
+      kw: { sw: ['habari','mambo','hujambo','shikamoo','vipi'], en: ['hi','hello','hey','good morning'] },
+      answer: {
+        sw: "Habari! 👋 Karibu **JAMA Graphics**.\n\nNaweza kukusaidia na nini leo?",
+        en: "Hi! 👋 Welcome to **JAMA Graphics**.\n\nHow can I help you today?"
+      },
+      chips: { sw: ['Bei','Nunua huduma','Portfolio'], en: ['Pricing','Buy service','Portfolio'] }
+    }
+  ];
+
+  // ==========================================================
+  // DOM
+  // ==========================================================
+  const $ = id => document.getElementById(id);
+  const chatBtn = $('jgChatBtn'), chatWin = $('jgWindow'), messages = $('jgMessages');
+  const input = $('jgInput'), sendBtn = $('jgSendBtn'), closeBtn = $('jgCloseBtn');
+  const soundBtn = $('jgSoundBtn'), themeBtn = $('jgThemeBtn'), voiceBtn = $('jgVoiceBtn');
+  const paletteBtn = $('jgPaletteBtn'), palette = $('jgPalette'), paletteList = $('jgPaletteList');
+  const quickBar = $('jgQuickBar'), badge = $('jgBadge');
+  const popup = $('jgPopup'), popupClose = $('jgPopupClose'), popupStart = $('jgPopupStart');
+  const popupTitle = $('jgPopupTitle'), popupMsgEl = $('jgPopupMsg'), statusEl = $('jgStatus');
+  const lightbox = $('jgLightbox'), lightboxImg = $('jgLightboxImg'), lightboxClose = $('jgLightboxClose');
+
+  const t = () => I18N[state.lang];
+
+  // ==========================================================
+  // SOUND THEMES
+  // ==========================================================
+  function beep(freq, dur) {
+    if (!state.sound) return;
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.frequency.value = freq || 880;
+      o.type = 'sine';
+      g.gain.setValueAtTime(0.08, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + (dur || 0.25));
+      o.start(ctx.currentTime); o.stop(ctx.currentTime + (dur || 0.25));
+    } catch(e) {}
+  }
+  function successSound() { beep(660, 0.15); setTimeout(() => beep(880, 0.15), 100); setTimeout(() => beep(1100, 0.25), 200); }
+  function errorSound() { beep(300, 0.3); }
+
+  // ==========================================================
+  // TIME
+  // ==========================================================
+  const now = () => {
+    const d = new Date();
+    return String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+  };
+
+  // ==========================================================
+  // STORAGE
+  // ==========================================================
+  function save() {
+    try {
+      localStorage.setItem(CFG.storage + '_history', JSON.stringify(state.history.slice(-60)));
+      localStorage.setItem(CFG.storage + '_stats', JSON.stringify(state.analytics));
+      localStorage.setItem(CFG.storage + '_loyalty', String(state.loyalty));
+    } catch(e) {}
+  }
+  function load() {
+    try {
+      const raw = localStorage.getItem(CFG.storage + '_history');
+      if (raw) {
+        state.history = JSON.parse(raw);
+        state.history.forEach(m => render(m.text, m.sender, m.time, false, false));
+      }
+    } catch(e) {}
+  }
+
+  // ==========================================================
+  // RENDER
+  // ==========================================================
+  function fmt(text) {
+    return text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<strong>$1</strong>')
+      .replace(/\n/g, '<br>')
+      .replace(new RegExp(CFG.phone.replace(/\s/g,'\\s'), 'g'), '<a href="tel:' + CFG.phone.replace(/\s/g,'') + '">' + CFG.phone + '</a>')
+      .replace(new RegExp(CFG.email, 'g'), '<a href="mailto:' + CFG.email + '">' + CFG.email + '</a>');
+  }
+
+  function render(text, sender, time, animate, addToHistory = true) {
+    const div = document.createElement('div');
+    div.className = 'jg-msg ' + sender;
+    let meta = '<div class="jg-msg-meta">' + (time || now());
+    if (sender === 'user') meta += ' <span class="jg-ticks">✓✓</span>';
+    meta += '</div>';
+    div.innerHTML = fmt(text) + meta;
+    if (animate === false) div.style.animation = 'none';
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+    if (addToHistory && time) state.history.push({ text, sender, time });
+    return div;
+  }
+
+  function addBot(text, chips, extraNode) {
+    const time = now();
+    const div = render(text, 'bot', time, true);
+    if (chips && chips.length) {
+      const chipsDiv = document.createElement('div');
+      chipsDiv.className = 'jg-chips';
+      chips.forEach(c => {
+        const b = document.createElement('button');
+        b.textContent = c;
+        b.addEventListener('click', () => handleChip(c));
+        chipsDiv.appendChild(b);
+      });
+      div.appendChild(chipsDiv);
+    }
+    if (extraNode) div.appendChild(extraNode);
+    save();
+    beep(880);
+    return div;
+  }
+
+  function addUser(text) {
+    render(text, 'user', now(), true);
+    save();
+  }
+
+  // ==========================================================
+  // TYPING
+  // ==========================================================
+  function showTyping() {
+    const d = document.createElement('div');
+    d.className = 'jg-typing';
+    d.id = 'jgTyping';
+    d.innerHTML = '<span></span><span></span><span></span>';
+    messages.appendChild(d);
+    messages.scrollTop = messages.scrollHeight;
+  }
+  function hideTyping() {
+    const el = document.getElementById('jgTyping');
+    if (el) el.remove();
+  }
+
+  // ==========================================================
+  // GALLERY
+  // ==========================================================
+  function renderGallery() {
+    const wrap = document.createElement('div');
+    wrap.className = 'jg-gallery';
+    PORTFOLIO.forEach(p => {
+      const el = document.createElement('div');
+      el.className = 'jg-gallery-item';
+      el.innerHTML = `<img src="${p.src}" alt="${p.title[state.lang]}" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1c1c1c,#2a2a2a)';"><div class="jg-gallery-label">${p.title[state.lang]}</div>`;
+      el.addEventListener('click', () => openLightbox(p.src));
+      wrap.appendChild(el);
+    });
+    return wrap;
+  }
+
+  function openLightbox(src) {
+    lightboxImg.src = src;
+    lightbox.classList.add('open');
+    beep(1000);
+  }
+
+  // ==========================================================
+  // PRODUCTS
+  // ==========================================================
+  function renderProducts() {
+    const wrap = document.createElement('div');
+    wrap.className = 'jg-products';
+    PRODUCTS.forEach(p => {
+      const el = document.createElement('div');
+      el.className = 'jg-product';
+      el.innerHTML = `
+        <div class="jg-product-info">
+          <div class="jg-product-icon">${p.icon}</div>
+          <div class="jg-product-text">
+            <div class="jg-product-name">${p.name[state.lang]}</div>
+            <div class="jg-product-price">TSh ${p.price.toLocaleString()}+</div>
+          </div>
+        </div>
+        <button class="jg-product-add" data-pid="${p.id}">+</button>
+      `;
+      wrap.appendChild(el);
+    });
+    return wrap;
+  }
+
+  function toggleProduct(pid) {
+    const p = PRODUCTS.find(x => x.id === pid);
+    if (!p) return;
+    const idx = state.cart.findIndex(c => c.id === pid);
+    if (idx >= 0) state.cart.splice(idx, 1);
+    else state.cart.push(p);
+    updateCartUI();
+    beep(1200);
+  }
+
+  function updateCartUI() {
+    document.querySelectorAll('.jg-product-add').forEach(btn => {
+      const pid = btn.dataset.pid;
+      const inCart = state.cart.some(c => c.id === pid);
+      btn.classList.toggle('added', inCart);
+      btn.textContent = inCart ? '✓' : '+';
+    });
+    if (state.cart.length) showQuote();
+  }
+
+  // ==========================================================
+  // QUOTE
+  // ==========================================================
+  function calculateTotals() {
+    let subtotal = state.cart.reduce((s, p) => s + p.price, 0);
+    let discount = activePromo ? Math.round(subtotal * activePromo.discount / 100) : 0;
+    let refDiscount = state.referrals.applied ? Math.round(subtotal * 0.05 / 100 * 100) : 0;
+    return { subtotal, discount, refDiscount, total: subtotal - discount - refDiscount };
+  }
+
+  function showQuote() {
+    if (!state.cart.length) return;
+    const { subtotal, discount, total } = calculateTotals();
+    const sw = state.lang === 'sw';
+    const header = sw ? '📋 **Quote Yako**' : '📋 **Your Quote**';
+    
+    let html = '<div class="jg-quote">';
+    html += '<div class="jg-quote-title">' + header + '</div>';
+    state.cart.forEach(p => {
+      html += '<div class="jg-quote-item"><span>' + p.icon + ' ' + p.name[state.lang] + '</span><span>TSh ' + p.price.toLocaleString() + '</span></div>';
+    });
+    html += '<div class="jg-quote-item"><span>' + (sw?'Jumla ndogo':'Subtotal') + '</span><span>TSh ' + subtotal.toLocaleString() + '</span></div>';
+    if (discount) {
+      html += '<div class="jg-quote-item" style="color:var(--jg-success)"><span>' + (sw?'Punguzo':'Discount') + ' (' + activePromo.discount + '%)</span><span>-TSh ' + discount.toLocaleString() + '</span></div>';
+    }
+    html += '<div class="jg-quote-total"><span>' + (sw?'JUMLA':'TOTAL') + '</span><span>TSh ' + total.toLocaleString() + '</span></div>';
+    html += '</div>';
+
+    // Actions
+    const actions = document.createElement('div');
+    actions.className = 'jg-actions';
+    
+    const btnWA = document.createElement('button');
+    btnWA.className = 'jg-action primary';
+    btnWA.textContent = sw ? '✓ Kamilisha' : '✓ Complete';
+    btnWA.addEventListener('click', () => completeQuote());
+    actions.appendChild(btnWA);
+    
+    const btnPDF = document.createElement('button');
+    btnPDF.className = 'jg-action';
+    btnPDF.textContent = sw ? '📄 PDF' : '📄 PDF';
+    btnPDF.addEventListener('click', exportPDF);
+    actions.appendChild(btnPDF);
+
+    const time = now();
+    const div = render("", 'bot', time, true);
+    div.innerHTML = fmt(header) + html;
+    div.appendChild(actions);
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+    state.analytics.quotes++;
+  }
+
+  function completeQuote() {
+    const { total } = calculateTotals();
+    const sw = state.lang === 'sw';
+    const msg = sw
+      ? 'Habari JAMA Graphics! Nimeona quote:\n\n' + state.cart.map(p => '• ' + p.name.sw).join('\n') + '\n\nJumla: TSh ' + total.toLocaleString() + '\n\nNataka kuanza kazi.'
+      : 'Hi JAMA Graphics! Quote request:\n\n' + state.cart.map(p => '• ' + p.name.en).join('\n') + '\n\nTotal: TSh ' + total.toLocaleString() + '\n\nI want to start.';
+    window.open('https://wa.me/' + CFG.wa + '?text=' + encodeURIComponent(msg), '_blank');
+    successSound();
+  }
+
+  function exportPDF() {
+    const sw = state.lang === 'sw';
+    const { subtotal, discount, total } = calculateTotals();
+    const { jsPDF } = window.jspdf || {};
+    
+    // Fallback to print dialog if jsPDF not available
+    const win = window.open('', '_blank');
+    win.document.write(`
+      <html><head><title>JAMA Graphics — Quote</title>
+      <style>
+        body{font-family:Arial;padding:40px;max-width:700px;margin:auto}
+        h1{color:#d4af37;border-bottom:3px solid #d4af37;padding-bottom:10px}
+        .header{display:flex;justify-content:space-between;margin-bottom:30px}
+        table{width:100%;border-collapse:collapse;margin:20px 0}
+        th,td{text-align:left;padding:10px;border-bottom:1px solid #ddd}
+        .total{font-size:1.3em;font-weight:bold;color:#d4af37;text-align:right;padding-top:15px}
+        .footer{margin-top:40px;text-align:center;color:#888;font-size:0.9em}
+      </style></head><body>
+      <h1>JAMA Graphics — ${sw?'Quote':'Quote'}</h1>
+      <div class="header">
+        <div><strong>JAMA Graphics</strong><br>${CFG.phone}<br>${CFG.email}</div>
+        <div style="text-align:right"><strong>${sw?'Tarehe':'Date'}:</strong> ${new Date().toLocaleDateString()}<br><strong>Ref:</strong> ${state.myRef}</div>
+      </div>
+      <table>
+        <tr><th>${sw?'Huduma':'Service'}</th><th style="text-align:right">${sw?'Bei':'Price'}</th></tr>
+        ${state.cart.map(p => `<tr><td>${p.icon} ${p.name[state.lang]}</td><td style="text-align:right">TSh ${p.price.toLocaleString()}</td></tr>`).join('')}
+        <tr><td><strong>${sw?'Jumla ndogo':'Subtotal'}</strong></td><td style="text-align:right">TSh ${subtotal.toLocaleString()}</td></tr>
+        ${discount ? `<tr><td style="color:green"><strong>${sw?'Punguzo':'Discount'} (${activePromo.discount}%)</strong></td><td style="text-align:right;color:green">-TSh ${discount.toLocaleString()}</td></tr>` : ''}
+      </table>
+      <div class="total">${sw?'JUMLA':'TOTAL'}: TSh ${total.toLocaleString()}</div>
+      <div class="footer">Asante kwa kuchagua JAMA Graphics! 🎨<br>Quote hii ni halali kwa siku 14.</div>
+      <script>setTimeout(()=>window.print(),500);<\/script>
+      </body></html>
+    `);
+    win.document.close();
+    successSound();
+  }
+
+  // ==========================================================
+  // CALCULATOR
+  // ==========================================================
+  function showCalculator() {
+    const sw = state.lang === 'sw';
+    const time = now();
+    const div = render(sw ? '🎨 **Calculator ya Bei**\n\nBadilisha sliders kuona bei papo hapo:' : '🎨 **Price Calculator**\n\nAdjust the sliders to see pricing instantly:', 'bot', time, true);
+    
+    const calc = document.createElement('div');
+    calc.className = 'jg-calc';
+    calc.innerHTML = `
+      <div class="jg-calc-row">
+        <div class="jg-calc-label"><span>${sw?'Michoro (Designs)':'Designs'}</span><span id="jgCalcDesigns">3</span></div>
+        <input type="range" class="jg-calc-slider" id="jgCalcDesignsRange" min="1" max="10" value="3">
+      </div>
+      <div class="jg-calc-row">
+        <div class="jg-calc-label"><span>${sw?'Marekebisho':'Revisions'}</span><span id="jgCalcRevs">2</span></div>
+        <input type="range" class="jg-calc-slider" id="jgCalcRevsRange" min="0" max="10" value="2">
+      </div>
+      <div class="jg-calc-row">
+        <div class="jg-calc-label"><span>${sw?'Faili za Ziada':'File Types'}</span><span id="jgCalcFiles">2</span></div>
+        <input type="range" class="jg-calc-slider" id="jgCalcFilesRange" min="1" max="6" value="2">
+      </div>
+      <div class="jg-calc-row">
+        <div class="jg-calc-label"><span>${sw?'Uharaka':'Urgency'}</span><span id="jgCalcUrg">${sw?'Kawaida':'Normal'}</span></div>
+        <input type="range" class="jg-calc-slider" id="jgCalcUrgRange" min="0" max="2" value="0">
+      </div>
+      <div class="jg-calc-total">
+        <small>${sw?'Bei ya Makadirio':'Estimated Price'}</small>
+        <strong id="jgCalcTotal">TSh 50,000</strong>
+      </div>
+    `;
+    div.appendChild(calc);
+    messages.scrollTop = messages.scrollHeight;
+
+    // Wire up
+    const designs = calc.querySelector('#jgCalcDesignsRange');
+    const revs = calc.querySelector('#jgCalcRevsRange');
+    const files = calc.querySelector('#jgCalcFilesRange');
+    const urg = calc.querySelector('#jgCalcUrgRange');
+    const totalEl = calc.querySelector('#jgCalcTotal');
+
+    function update() {
+      const d = parseInt(designs.value);
+      const r = parseInt(revs.value);
+      const f = parseInt(files.value);
+      const u = parseInt(urg.value);
+      const urgText = u === 0 ? (sw?'Kawaida':'Normal') : u === 1 ? (sw?'Haraka':'Fast') : (sw?'Urgent':'Urgent');
+      calc.querySelector('#jgCalcDesigns').textContent = d;
+      calc.querySelector('#jgCalcRevs').textContent = r;
+      calc.querySelector('#jgCalcFiles').textContent = f;
+      calc.querySelector('#jgCalcUrg').textContent = urgText;
+
+      const base = 20000;
+      const urgMult = [1, 1.5, 2][u];
+      const total = Math.round((base + d * 8000 + r * 3000 + f * 2500) * urgMult);
+      totalEl.textContent = 'TSh ' + total.toLocaleString();
+      beep(600 + d * 50, 0.05);
+    }
+    [designs, revs, files, urg].forEach(i => i.addEventListener('input', update));
+    update();
+  }
+
+  // ==========================================================
+  // BOOKING
+  // ==========================================================
+  function showBookingForm() {
+    const sw = state.lang === 'sw';
+    const labels = sw ? {
+      title: '📅 **Weka Appointment**',
+      name: 'Jina lako', phone: 'Namba ya simu', service: 'Huduma',
+      date: 'Tarehe', time: 'Muda', notes: 'Maelezo ya ziada',
+      submit: 'Weka Appointment →',
+      success: '✓ **Imefanikiwa!** Tutakurudia hivi karibuni kwa WhatsApp.'
+    } : {
+      title: '📅 **Book Appointment**',
+      name: 'Your name', phone: 'Phone number', service: 'Service',
+      date: 'Date', time: 'Time', notes: 'Extra notes',
+      submit: 'Book Appointment →',
+      success: '✓ **Booked!** We will contact you shortly via WhatsApp.'
+    };
+
+    const time = now();
+    const div = render(labels.title, 'bot', time, true);
+    
+    const form = document.createElement('div');
+    form.className = 'jg-booking';
+    form.innerHTML = `
+      <div class="jg-booking-row"><label>${labels.name}</label><input type="text" id="jgBookName"></div>
+      <div class="jg-booking-row"><label>${labels.phone}</label><input type="tel" id="jgBookPhone" placeholder="07XX XXX XXX"></div>
+      <div class="jg-booking-row"><label>${labels.service}</label>
+        <select id="jgBookService">${PRODUCTS.map(p => `<option value="${p.id}">${p.icon} ${p.name[state.lang]}</option>`).join('')}</select>
+      </div>
+      <div class="jg-booking-row"><label>${labels.date}</label><input type="date" id="jgBookDate" min="${new Date().toISOString().split('T')[0]}"></div>
+      <div class="jg-booking-row"><label>${labels.time}</label><input type="time" id="jgBookTime" value="10:00"></div>
+      <div class="jg-booking-row"><label>${labels.notes}</label><textarea id="jgBookNotes" rows="2"></textarea></div>
+      <button class="jg-booking-submit" id="jgBookSubmit">${labels.submit}</button>
+    `;
+    div.appendChild(form);
+
+    setTimeout(() => {
+      document.getElementById('jgBookSubmit').addEventListener('click', async () => {
+        const n = document.getElementById('jgBookName').value.trim();
+        const p = document.getElementById('jgBookPhone').value.trim();
+        const s = document.getElementById('jgBookService').value;
+        const d = document.getElementById('jgBookDate').value;
+        const tm = document.getElementById('jgBookTime').value;
+        const nt = document.getElementById('jgBookNotes').value.trim();
+        if (!n || !p || !d) { errorSound(); return; }
+        const prod = PRODUCTS.find(x => x.id === s);
+
+        state.analytics.bookings++;
+        state.loyalty += 50;
+
+        addBot(labels.success, null);
+        addLoyaltyBadge();
+
+        const bookingMsg = sw
+          ? `📅 *Booking Mpya*\n\nJina: ${n}\nSimu: ${p}\nHuduma: ${prod.name.sw}\nTarehe: ${d}\nMuda: ${tm}${nt ? '\nMaelezo: ' + nt : ''}`
+          : `📅 *New Booking*\n\nName: ${n}\nPhone: ${p}\nService: ${prod.name.en}\nDate: ${d}\nTime: ${tm}${nt ? '\nNotes: ' + nt : ''}`;
+
+        // Email via Formspree
+        try {
+          if (CFG.formspree && !CFG.formspree.includes('YOUR_FORM_ID')) {
+            await fetch(CFG.formspree, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify({ name: n, phone: p, service: prod.name.en, date: d, time: tm, notes: nt, type: 'Booking', _subject: 'New Booking — JAMA Graphics' })
+            });
+          }
+        } catch(e) {}
+
+        addWA('https://wa.me/' + CFG.wa + '?text=' + encodeURIComponent(bookingMsg),
+          sw ? 'Thibitisha WhatsApp' : 'Confirm via WhatsApp');
+        successSound();
+      });
+    }, 100);
+  }
+
+  // ==========================================================
+  // VIDEO CALL
+  // ==========================================================
+  function showVideoCall() {
+    const sw = state.lang === 'sw';
+    const time = now();
+    const div = render(sw ? '🎬 **Video Call Booking**\n\nChagua aina ya video call:' : '🎬 **Video Call Booking**\n\nChoose call type:', 'bot', time, true);
+    
+    const actions = document.createElement('div');
+    actions.className = 'jg-actions';
+    [
+      { label: sw?'📹 Google Meet (Dakika 30)':'📹 Google Meet (30 min)', type: 'meet' },
+      { label: sw?'📹 Zoom (Dakika 30)':'📹 Zoom (30 min)', type: 'zoom' },
+      { label: sw?'📹 WhatsApp Video':'📹 WhatsApp Video', type: 'wa' }
+    ].forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'jg-action';
+      btn.textContent = opt.label;
+      btn.addEventListener('click', () => bookVideoCall(opt.type));
+      actions.appendChild(btn);
+    });
+    div.appendChild(actions);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function bookVideoCall(type) {
+    const sw = state.lang === 'sw';
+    const msg = sw
+      ? `Habari JAMA Graphics! Nahitaji video call ya aina: ${type.toUpperCase()}.\n\nTafadhali nipe link ya meeting.`
+      : `Hi JAMA Graphics! I'd like a video call: ${type.toUpperCase()}.\n\nPlease send a meeting link.`;
+    addBot(sw ? '✓ Sawa! Bonyeza hapa kukamilisha:' : '✓ Sure! Tap here to complete:', null);
+    addWA('https://wa.me/' + CFG.wa + '?text=' + encodeURIComponent(msg), sw?'Thibitisha kwa WhatsApp':'Confirm on WhatsApp');
+    state.loyalty += 30;
+    successSound();
+  }
+
+  // ==========================================================
+  // RATING
+  // ==========================================================
+  function showRating() {
+    const sw = state.lang === 'sw';
+    const time = now();
+    const div = render(sw ? '🌟 **Kadiria huduma yetu**\n\nBonyeza nyota hapa chini:' : '🌟 **Rate our service**\n\nTap the stars below:', 'bot', time, true);
+    
+    const wrap = document.createElement('div');
+    wrap.className = 'jg-rating';
+    for (let i = 1; i <= 5; i++) {
+      const btn = document.createElement('button');
+      btn.className = 'jg-star';
+      btn.textContent = '★';
+      btn.dataset.val = i;
+      btn.addEventListener('click', () => rateService(i));
+      wrap.appendChild(btn);
+    }
+    div.appendChild(wrap);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function rateService(val) {
+    const sw = state.lang === 'sw';
+    state.analytics.ratings.push(val);
+    state.loyalty += val * 10;
+
+    document.querySelectorAll('.jg-star').forEach(s => {
+      s.classList.toggle('active', parseInt(s.dataset.val) <= val);
+    });
+
+    const msgs = {
+      5: sw ? '🎉 **Asante sana!** Nyota 5! Umetupa **100 loyalty points**!' : '🎉 **Thank you!** 5 stars! You earned **100 loyalty points**!',
+      4: sw ? '😊 **Asante!** Nyota 4! Umetupa **80 loyalty points**.' : '😊 **Thanks!** 4 stars! You earned **80 loyalty points**.',
+      3: sw ? '👍 **Asante!** Tutaendelea kuboresha.' : '👍 **Thanks!** We will keep improving.',
+      2: sw ? '😔 Samahani. Tafadhali tuambie tatizo.' : '😔 Sorry. Please tell us the issue.',
+      1: sw ? '😢 Samahani sana. Tutawasiliana nawe.' : '😢 Very sorry. We will reach out.'
+    };
+    setTimeout(() => {
+      addBot(msgs[val], null);
+      addLoyaltyBadge();
+      successSound();
+    }, 500);
+  }
+
+  // ==========================================================
+  // REFERRAL
+  // ==========================================================
+  function showReferral() {
+    const sw = state.lang === 'sw';
+    const time = now();
+    const div = render(sw 
+      ? `🏆 **Referral Program**\n\nKaribu kila rafiki anayekuja kupitia wewe, wewe unapata **5% ya kazi yao** kama cash!\n\n🎁 **Code yako:**` 
+      : `🏆 **Referral Program**\n\nEvery friend who comes through you earns you **5% of their project** in cash!\n\n🎁 **Your code:**`,
+      'bot', time, true);
+    
+    const ref = document.createElement('div');
+    ref.className = 'jg-calc-total';
+    ref.innerHTML = `<small>${sw?'Code Yako':'Your Code'}</small><strong>${state.myRef}</strong>`;
+    div.appendChild(ref);
+    
+    const actions = document.createElement('div');
+    actions.className = 'jg-actions';
+    const shareBtn = document.createElement('button');
+    shareBtn.className = 'jg-action primary';
+    shareBtn.textContent = sw?'📤 Share WhatsApp':'📤 Share WhatsApp';
+    shareBtn.addEventListener('click', () => {
+      const text = sw
+        ? `Karibu JAMA Graphics! 🎨 Kazi nzuri za design. Tumia code yangu ${state.myRef} upate punguzo la 5%: https://wa.me/${CFG.wa}`
+        : `Check out JAMA Graphics! 🎨 Amazing design work. Use my code ${state.myRef} for 5% off: https://wa.me/${CFG.wa}`;
+      window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+      state.loyalty += 20;
+    });
+    actions.appendChild(shareBtn);
+    div.appendChild(actions);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  // ==========================================================
+  // LOYALTY
+  // ==========================================================
+  function showLoyalty() {
+    const sw = state.lang === 'sw';
+    const time = now();
+    const div = render(sw
+      ? `💎 **Loyalty Program**\n\nPointi 100 = TSh 10,000 punguzo!\n\nUnapata points kwa:\n• Kuweka booking (50 pts)\n• Kuzungumza (10 pts)\n• Kudownload quote (20 pts)\n• Ku share (20 pts)\n\n🎯 **Pointi zako:**`
+      : `💎 **Loyalty Program**\n\n100 points = TSh 10,000 discount!\n\nEarn points by:\n• Booking (50 pts)\n• Chatting (10 pts)\n• Downloading quote (20 pts)\n• Sharing (20 pts)\n\n🎯 **Your points:**`,
+      'bot', time, true);
+    
+    const loyalty = document.createElement('div');
+    loyalty.className = 'jg-loyalty';
+    loyalty.innerHTML = `
+      <div class="jg-loyalty-icon">💎</div>
+      <div class="jg-loyalty-info">
+        <h5>${sw?'Pointi Zako':'Your Points'}</h5>
+        <p>${sw?'Pointi 100 = TSh 10,000':'100 pts = TSh 10,000'}</p>
+      </div>
+      <div class="jg-loyalty-points">${state.loyalty}</div>
+    `;
+    div.appendChild(loyalty);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function addLoyaltyBadge() {
+    if (state.loyalty > 0 && state.loyalty % 100 === 0) {
+      setTimeout(() => {
+        const sw = state.lang === 'sw';
+        addBot(sw ? `🎉 Umefikia pointi **${state.loyalty}**! Unaweza kutumia kama punguzo la TSh ${(state.loyalty * 100).toLocaleString()}.` : `🎉 You've reached **${state.loyalty}** points! Redeemable for TSh ${(state.loyalty * 100).toLocaleString()} discount.`, null);
+      }, 800);
+    }
+  }
+
+  // ==========================================================
+  // TESTIMONIALS
+  // ==========================================================
+  function showTestimonials() {
+    const sw = state.lang === 'sw';
+    const time = now();
+    const div = render(sw ? '⭐ **Wateja Wanasema**\n\nHaya ni mawazo kutoka kwa wateja wetu:' : '⭐ **What Clients Say**\n\nHear from our happy clients:', 'bot', time, true);
+    
+    TESTIMONIALS.forEach(t => {
+      const el = document.createElement('div');
+      el.className = 'jg-testi';
+      el.innerHTML = `
+        <div class="jg-testi-stars">${'★'.repeat(t.stars)}</div>
+        <div class="jg-testi-text">${t.text[state.lang]}</div>
+        <div class="jg-testi-author">
+          <div class="jg-testi-avatar">${t.name[0]}</div>
+          <div>
+            <div class="jg-testi-name">${t.name}</div>
+            <div class="jg-testi-role">${t.role[state.lang]}</div>
+          </div>
+        </div>
+      `;
+      div.appendChild(el);
+    });
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  // ==========================================================
+  // BEFORE/AFTER
+  // ==========================================================
+  function showBeforeAfter() {
+    const sw = state.lang === 'sw';
+    const time = now();
+    const div = render(sw ? '🖼️ **Kabla na Baada**\n\nVuta mstari kuona tofauti:' : '🖼️ **Before & After**\n\nDrag the line to see the difference:', 'bot', time, true);
+    
+    const ba = document.createElement('div');
+    ba.className = 'jg-ba';
+    ba.innerHTML = `
+      <img class="jg-ba-after" src="images/before1.jpg" alt="Before" onerror="this.style.background='linear-gradient(135deg,#333,#555)';this.removeAttribute('src');">
+      <img src="images/after1.jpg" alt="After" onerror="this.style.background='linear-gradient(135deg,#d4af37,#f4d03f)';this.removeAttribute('src');">
+      <div class="jg-ba-line"></div>
+      <div class="jg-ba-label before">${sw?'KABLA':'BEFORE'}</div>
+      <div class="jg-ba-label after">${sw?'BAADA':'AFTER'}</div>
+    `;
+    div.appendChild(ba);
+    
+    // Wire up slider
+    let dragging = false;
+    function updatePos(e) {
+      const rect = ba.getBoundingClientRect();
+      const x = (e.clientX || e.touches[0].clientX) - rect.left;
+      const pct = Math.max(0, Math.min(100, (x / rect.width) * 100));
+      ba.querySelector('.jg-ba-after').style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+      ba.querySelector('.jg-ba-line').style.left = pct + '%';
+    }
+    ba.addEventListener('mousedown', e => { dragging = true; updatePos(e); });
+    ba.addEventListener('touchstart', e => { dragging = true; updatePos(e); });
+    document.addEventListener('mousemove', e => { if (dragging) updatePos(e); });
+    document.addEventListener('touchmove', e => { if (dragging) updatePos(e); });
+    document.addEventListener('mouseup', () => dragging = false);
+    document.addEventListener('touchend', () => dragging = false);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  // ==========================================================
+  // CLIENT PORTAL
+  // ==========================================================
+  function showPortal() {
+    const sw = state.lang === 'sw';
+    const time = now();
+    const projects = JSON.parse(localStorage.getItem(CFG.storage + '_projects') || '[]');
+    
+    if (!projects.length) {
+      const div = render(sw 
+        ? '💼 **Client Portal**\n\nHakuna project inayoendelea kwa sasa.\n\nAnza project yako ya kwanza kwa kubonyeza hapa chini:'
+        : '💼 **Client Portal**\n\nNo active projects currently.\n\nStart your first project by clicking below:',
+        'bot', time, true);
+      const actions = document.createElement('div');
+      actions.className = 'jg-actions';
+      const btn = document.createElement('button');
+      btn.className = 'jg-action primary';
+      btn.textContent = sw?'🚀 Anza Project':'🚀 Start Project';
+      btn.addEventListener('click', () => execCommand('quote'));
+      actions.appendChild(btn);
+      div.appendChild(actions);
+    } else {
+      const div = render(sw?'💼 **Projects Zako**':'💼 **Your Projects**', 'bot', time, true);
+      projects.forEach(p => {
+        const el = document.createElement('div');
+        el.className = 'jg-product';
+        el.innerHTML = `
+          <div class="jg-product-info">
+            <div class="jg-product-icon">${p.status === 'done' ? '✅' : '⏳'}</div>
+            <div class="jg-product-text">
+              <div class="jg-product-name">${p.name}</div>
+              <div class="jg-product-price">${p.status === 'done' ? (sw?'Imekamilika':'Completed') : (sw?'Inaendelea':'In progress')} — ${p.progress}%</div>
+            </div>
+          </div>
+        `;
+        div.appendChild(el);
+      });
+    }
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  // ==========================================================
+  // COMMAND PALETTE
+  // ==========================================================
+  function buildPalette() {
+    paletteList.innerHTML = '';
+    t().commands.forEach(c => {
+      const el = document.createElement('div');
+      el.className = 'jg-palette-item';
+      el.innerHTML = `<div class="jg-palette-item-icon">${c.icon}</div><span>${c.label}</span>`;
+      el.addEventListener('click', () => {
+        palette.classList.remove('open');
+        execCommand(c.cmd);
+      });
+      paletteList.appendChild(el);
+    });
+  }
+
+  function execCommand(cmd) {
+    const sw = state.lang === 'sw';
+    if (cmd === 'quote') { addBot(sw?'💰 Hebu tujenge quote yako. Chagua huduma:':'💰 Let\'s build your quote. Pick services:', null); const d = messages.lastChild; d.appendChild(renderProducts()); }
+    else if (cmd === 'calc') showCalculator();
+    else if (cmd === 'book') showBookingForm();
+    else if (cmd === 'video') showVideoCall();
+    else if (cmd === 'gallery') { addBot(sw?'📸 Kazi zangu:':'📸 My works:', null); messages.lastChild.appendChild(renderGallery()); }
+    else if (cmd === 'beforeafter') showBeforeAfter();
+    else if (cmd === 'rate') showRating();
+    else if (cmd === 'ref') showReferral();
+    else if (cmd === 'loyalty') showLoyalty();
+    else if (cmd === 'portal') showPortal();
+    else if (cmd === 'testi') showTestimonials();
+    else if (cmd === 'human') talkToHuman();
+    else if (cmd === 'clear') clearChat();
+  }
+
+  // ==========================================================
+  // CHIPS
+  // ==========================================================
+  function handleChip(c) {
+    const low = c.toLowerCase();
+    if (low.includes('whatsapp')) return talkToHuman();
+    if (low.includes('quote') || low.includes('kadirie')) return execCommand('quote');
+    if (low.includes('calculator')) return execCommand('calc');
+    if (low.includes('portfolio') || low.includes('kazi zako')) return execCommand('gallery');
+    if (low.includes('rating') || low.includes('kadiria')) return execCommand('rate');
+    if (low.includes('appointment')) return execCommand('book');
+    if (low.includes('video')) return execCommand('video');
+    if (low.includes('nunua') || low.includes('buy') || low.includes('huduma')) return execCommand('quote');
+    if (low.includes('email') || low.includes('barua')) return window.location.href = 'mailto:' + CFG.email;
+    send(c);
+  }
+
+  // ==========================================================
+  // TALK TO HUMAN
+  // ==========================================================
+  function talkToHuman() {
+    const sw = state.lang === 'sw';
+    const msg = sw ? 'Habari JAMA Graphics! Nahitaji mazungumzo ya moja kwa moja.' : 'Hi JAMA Graphics! I need direct assistance.';
+    addBot(sw ? '💬 Sawa! Bonyeza hapa chini:' : '💬 Sure! Tap below:', null);
+    addWA('https://wa.me/' + CFG.wa + '?text=' + encodeURIComponent(msg), t().whatsappCta);
+  }
+
+  function addWA(url, label) {
+    const a = document.createElement('a');
+    a.className = 'jg-wa-cta';
+    a.href = url;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.innerHTML = '<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> ' + label;
+    messages.appendChild(a);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  // ==========================================================
+  // CLEAR
+  // ==========================================================
+  function clearChat() {
+    if (!confirm(t().clearConfirm)) return;
+    state.history = [];
+    state.cart = [];
+    activePromo = null;
+    messages.innerHTML = '';
+    localStorage.removeItem(CFG.storage + '_history');
+    addBot(t().cleared, t().quickReplies);
+  }
+
+  // ==========================================================
+  // AI
+  // ==========================================================
+  function findAnswer(q) {
+    const lower = q.toLowerCase().trim();
+    const upper = q.toUpperCase().trim();
+
+    if (PROMOS[upper]) {
+      activePromo = PROMOS[upper];
+      const sw = state.lang === 'sw';
+      return { text: `🎉 **${sw?'Promo imetumika!':'Promo applied!'}**\n\n${activePromo.msg[state.lang]}`, chips: [sw?'Nunua huduma':'Buy service'] };
+    }
+
+    let best = null, score = 0;
+    for (const item of KB) {
+      let s = 0;
+      const list = state.lang === 'sw' ? item.kw.sw : item.kw.en;
+      for (const k of list) if (lower.includes(k)) s += k.length;
+      if (s > score) { score = s; best = item; }
+    }
+    if (best) return { text: best.answer[state.lang], chips: best.chips[state.lang], gallery: best.gallery };
+    return { text: t().notFound, chips: t().quickReplies };
+  }
+
+  // ==========================================================
+  // SEND
+  // ==========================================================
+  function send(text) {
+    if (!text || !text.trim()) return;
+    const trimmed = text.trim();
+    addUser(trimmed);
+    state.analytics.questions[trimmed.substring(0,40)] = (state.analytics.questions[trimmed.substring(0,40)] || 0) + 1;
+    state.loyalty += 10;
+    save();
+    input.value = '';
+    input.focus();
+    showTyping();
+    const delay = CFG.typingSpeed[0] + Math.random() * (CFG.typingSpeed[1] - CFG.typingSpeed[0]);
+    setTimeout(() => {
+      hideTyping();
+      const res = findAnswer(trimmed);
+      const botDiv = addBot(res.text, res.chips);
+      if (res.gallery) {
+        setTimeout(() => botDiv.appendChild(renderGallery()), 300);
+      }
+    }, delay);
+  }
+
+  // ==========================================================
+  // LANG
+  // ==========================================================
+  function setLang(lang) {
+    state.lang = lang;
+    localStorage.setItem(CFG.storage + '_lang', lang);
+    document.querySelectorAll('.jg-lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    statusEl.textContent = t().status;
+    input.placeholder = t().placeholder;
+    popupMsgEl.innerHTML = t().popupMsg;
+    popupStart.textContent = t().popupBtn;
+    buildQuickBar();
+    buildPalette();
+  }
+
+  function buildQuickBar() {
+    quickBar.innerHTML = '';
+    t().quickReplies.forEach(q => {
+      const b = document.createElement('button');
+      b.textContent = q;
+      b.addEventListener('click', () => handleChip(q));
+      quickBar.appendChild(b);
+    });
+  }
+
+  // ==========================================================
+  // THEME
+  // ==========================================================
+  function setTheme(theme) {
+    state.theme = theme;
+    localStorage.setItem(CFG.storage + '_theme', theme);
+    chatWin.classList.toggle('jg-light-theme', theme === 'light');
+    themeBtn.textContent = theme === 'light' ? '☀️' : '🌙';
+  }
+
+  // ==========================================================
+  // VOICE
+  // ==========================================================
+  function startVoice() {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SR) {
+      addBot(state.lang === 'sw' ? '🎤 Kifaa chako hakiunga mkono sauti.' : '🎤 Voice not supported.', null);
+      return;
+    }
+    const rec = new SR();
+    rec.lang = state.lang === 'sw' ? 'sw-TZ' : 'en-US';
+    rec.onresult = e => { input.value = e.results[0][0].transcript; send(input.value); };
+    rec.onerror = () => voiceBtn.classList.remove('recording');
+    rec.onend = () => voiceBtn.classList.remove('recording');
+    voiceBtn.classList.add('recording');
+    rec.start();
+  }
+
+  // ==========================================================
+  // OPEN / CLOSE
+  // ==========================================================
+  function openChat() {
+    chatWin.classList.add('open');
+    popup.classList.remove('show');
+    badge.style.display = 'none';
+    input.focus();
+    if (state.history.length === 0) {
+      setTimeout(() => addBot(t().welcome, t().quickReplies), 300);
+    }
+  }
+  function closeChat() { chatWin.classList.remove('open'); }
+
+  // ==========================================================
+  // EVENTS
+  // ==========================================================
+  chatBtn.addEventListener('click', () => chatWin.classList.contains('open') ? closeChat() : openChat());
+  closeBtn.addEventListener('click', closeChat);
+  sendBtn.addEventListener('click', () => send(input.value));
+  input.addEventListener('keypress', e => { if (e.key === 'Enter') { e.preventDefault(); send(input.value); } });
+  soundBtn.addEventListener('click', () => {
+    state.sound = !state.sound;
+    soundBtn.classList.toggle('active', state.sound);
+    soundBtn.textContent = state.sound ? '🔔' : '🔕';
+    localStorage.setItem(CFG.storage + '_sound', state.sound ? 'on' : 'off');
+  });
+  themeBtn.addEventListener('click', () => setTheme(state.theme === 'dark' ? 'light' : 'dark'));
+  voiceBtn.addEventListener('click', startVoice);
+  paletteBtn.addEventListener('click', () => palette.classList.toggle('open'));
+  popupClose.addEventListener('click', () => { popup.classList.remove('show'); sessionStorage.setItem(CFG.storage + '_popup', '1'); });
+  popupStart.addEventListener('click', () => { popup.classList.remove('show'); openChat(); sessionStorage.setItem(CFG.storage + '_popup', '1'); });
+  lightboxClose.addEventListener('click', () => lightbox.classList.remove('open'));
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+
+  document.querySelectorAll('.jg-lang-btn').forEach(btn => btn.addEventListener('click', () => setLang(btn.dataset.lang)));
+
+  messages.addEventListener('click', e => {
+    const add = e.target.closest('.jg-product-add');
+    if (add) toggleProduct(add.dataset.pid);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+      e.preventDefault();
+      console.log('%c📊 JAMA Analytics', 'background:#d4af37;color:#000;padding:4px 10px;border-radius:4px;font-weight:bold;');
+      console.table(state.analytics.questions);
+      console.log('Sessions:', state.analytics.sessions, '| Quotes:', state.analytics.quotes, '| Bookings:', state.analytics.bookings, '| Loyalty:', state.loyalty);
+      console.log('Ratings:', state.analytics.ratings);
+      console.log('Referral code:', state.myRef);
+      alert('Analytics: Angalia Console (F12) 📊');
+    }
+    if (e.ctrlKey && e.key === 'k' && chatWin.classList.contains('open')) {
+      e.preventDefault();
+      palette.classList.toggle('open');
+    }
+    if (e.key === 'Escape') {
+      palette.classList.remove('open');
+      lightbox.classList.remove('open');
+      if (chatWin.classList.contains('open')) closeChat();
+    }
+  });
+
+  // ==========================================================
+  // INIT
+  // ==========================================================
+  state.analytics.sessions++;
+  save();
+
+  setLang(state.lang);
+  setTheme(state.theme);
+  soundBtn.classList.toggle('active', state.sound);
+  soundBtn.textContent = state.sound ? '🔔' : '🔕';
+  load();
+
+  if (!sessionStorage.getItem(CFG.storage + '_popup') && state.history.length === 0) {
+    setTimeout(() => popup.classList.add('show'), CFG.popupDelay);
+  }
+})();
+</script>
+</html>
