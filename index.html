@@ -4013,6 +4013,59 @@
   }
 
   // ==========================================================
+    // ==========================================================
+  // ===== SAUTI YA KUKARIBISHA =====
+  // ==========================================================
+  function playWelcomeSound() {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      
+      // Sauti 1: Karibu (chime)
+      const osc1 = ctx.createOscillator();
+      const gain1 = ctx.createGain();
+      osc1.connect(gain1);
+      gain1.connect(ctx.destination);
+      osc1.frequency.value = 660; // E
+      osc1.type = 'sine';
+      gain1.gain.setValueAtTime(0.12, ctx.currentTime);
+      gain1.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+      osc1.start(ctx.currentTime);
+      osc1.stop(ctx.currentTime + 0.25);
+      
+      // Sauti 2: Juu kidogo (baada ya 0.12s)
+      setTimeout(() => {
+        const osc2 = ctx.createOscillator();
+        const gain2 = ctx.createGain();
+        osc2.connect(gain2);
+        gain2.connect(ctx.destination);
+        osc2.frequency.value = 880; // A
+        osc2.type = 'sine';
+        gain2.gain.setValueAtTime(0.12, ctx.currentTime);
+        gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+        osc2.start(ctx.currentTime);
+        osc2.stop(ctx.currentTime + 0.3);
+      }, 120);
+      
+      // Sauti 3: Juu zaidi (baada ya 0.24s) — inafanya "ding-ding-ding"
+      setTimeout(() => {
+        const osc3 = ctx.createOscillator();
+        const gain3 = ctx.createGain();
+        osc3.connect(gain3);
+        gain3.connect(ctx.destination);
+        osc3.frequency.value = 1100; // C#
+        osc3.type = 'sine';
+        gain3.gain.setValueAtTime(0.12, ctx.currentTime);
+        gain3.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+        osc3.start(ctx.currentTime);
+        osc3.stop(ctx.currentTime + 0.4);
+      }, 240);
+      
+    } catch(e) {
+      console.log('Sauti haijafanya kazi:', e);
+    }
+  }
+
+  // ==========================================================
   // OPEN / CLOSE
   // ==========================================================
   function openChat() {
@@ -4020,12 +4073,12 @@
     popup.classList.remove('show');
     badge.style.display = 'none';
     input.focus();
+    playWelcomeSound();  // ← SAUTI INAPIGA HAPA
     if (state.history.length === 0) {
       setTimeout(() => addBot(t().welcome, t().quickReplies), 300);
     }
   }
   function closeChat() { chatWin.classList.remove('open'); }
-
   // ==========================================================
   // EVENTS
   // ==========================================================
