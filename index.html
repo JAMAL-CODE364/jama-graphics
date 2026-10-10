@@ -1512,80 +1512,166 @@
     localStorage.setItem(CFG.storage + '_theme', next);
   });
 
-  // ===== PORTFOLIO =====
-  const portfolioData = [
-    { category: 'poster', src: 'images/poster1.jpg', label: 'Poster Design', title: 'Campaign Launch' },
-    { category: 'social', src: 'images/social1.jpg', label: 'Social Media', title: 'Instagram Story' },
-    { category: 'flyer', src: 'images/flyer1.jpg', label: 'Flyer Design', title: 'Event Promo' },
-    { category: 'card', src: 'images/card1.jpg', label: 'Business Card', title: 'Brand Card' },
-    { category: 'logo', src: 'images/logo1.jpg', label: 'Logo Design', title: 'Identity Mark' },
-    { category: 'website', src: 'images/website1.jpg', label: 'Website Design', title: 'Digital Presence' },
-    { category: 'poster', src: 'images/poster2.jpg', label: 'Poster Design', title: 'Concert Poster' },
-    { category: 'social', src: 'images/social2.jpg', label: 'Social Media', title: 'Product Teaser' },
-    { category: 'flyer', src: 'images/flyer2.jpg', label: 'Flyer Design', title: 'Retail Campaign' },
-    { category: 'poster', src: 'images/poster3.jpg', label: 'Poster Design', title: 'Education Poster' },
-    { category: 'social', src: 'images/social3.jpg', label: 'Social Media', title: 'Brand Boost' },
-    { category: 'logo', src: 'images/logo2.jpg', label: 'Logo Design', title: 'Monogram Logo' },
-    { category: 'website', src: 'images/website1.jpg', label: 'Website Design', title: 'Landing Page' },
-    { category: 'poster', src: 'images/poster4.jpg', label: 'Poster Design', title: 'Event Art' },
-    { category: 'social', src: 'images/social4.jpg', label: 'Social Media', title: 'Marketing Post' },
-    { category: 'flyer', src: 'images/flyer3.jpg', label: 'Flyer Design', title: 'Promo Flyer' },
-    { category: 'card', src: 'images/card2.jpg', label: 'Business Card', title: 'Luxury Card' },
-    { category: 'logo', src: 'images/logo3.jpg', label: 'Logo Design', title: 'Minimal Icon' },
-    { category: 'poster', src: 'images/poster5.jpg', label: 'Poster Design', title: 'Awareness Poster' },
-    { category: 'social', src: 'images/social5.jpg', label: 'Social Media', title: 'Campaign Visual' },
-    { category: 'flyer', src: 'images/flyer4.jpg', label: 'Flyer Design', title: 'Product Flyer' },
-    { category: 'poster', src: 'images/poster6.jpg', label: 'Poster Design', title: 'Annual Poster' },
-    { category: 'social', src: 'images/social6.jpg', label: 'Social Media', title: 'Launch Post' },
-    { category: 'flyer', src: 'images/flyer5.jpg', label: 'Flyer Design', title: 'Business Flyer' }
-  ];
+    // ==========================================================
+  // AUTO-LOAD PORTFOLIO KUTOKA GITHUB
+  // ==========================================================
+  const GITHUB_USER = 'JAMAL-CODE364';
+  const GITHUB_REPO = 'jama-graphics';
+  const GITHUB_BRANCH = 'main';
+  const IMAGES_FOLDER = 'images';
 
-  const portfolioGrid = document.getElementById('portfolioGrid');
-  portfolioGrid.innerHTML = portfolioData.map((item, index) => `
-    <div class="portfolio-item" data-category="${item.category}" data-index="${index}">
-      <img src="${item.src}" alt="${item.title}" loading="lazy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%23161616%22 width=%22400%22 height=%22500%22/><text x=%22200%22 y=%22250%22 fill=%22%23d4af37%22 font-family=%22sans-serif%22 font-size=%2224%22 text-anchor=%22middle%22>${item.label}</text></svg>'">
-      <div class="portfolio-overlay">
-        <span>${item.label}</span>
-        <h4>${item.title}</h4>
+  async function loadPortfolioImages() {
+    const cacheKey = 'jama_portfolio_cache';
+    const cacheTimeKey = 'jama_portfolio_time';
+    const cacheTime = parseInt(localStorage.getItem(cacheTimeKey) || '0');
+    const oneHour = 60 * 60 * 1000;
+    
+    // Tumia cache kama ipo (kwa masaa 1)
+    if (Date.now() - cacheTime < oneHour) {
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) {
+        try { return JSON.parse(cached); } catch(e) {}
+      }
+    }
+    
+    try {
+      const response = await fetch(
+        'https://api.github.com/repos/' + GITHUB_USER + '/' + GITHUB_REPO + '/contents/' + IMAGES_FOLDER + '?ref=' + GITHUB_BRANCH
+      );
+      
+      if (!response.ok) throw new Error('API error');
+      
+      const files = await response.json();
+      
+      const images = files
+        .filter(f => /\.(jpe?g|png|webp|gif)$/i.test(f.name))
+        .map(f => {
+          const name = f.name.toLowerCase();
+          
+          let category = 'poster';
+          if (name.startsWith('social')) category = 'social';
+          else if (name.startsWith('flyer')) category = 'flyer';
+          else if (name.startsWith('card')) category = 'card';
+          else if (name.startsWith('logo')) category = 'logo';
+          else if (name.startsWith('website')) category = 'website';
+          
+          const title = f.name
+            .replace(/\.[^.]+$/, '')
+            .replace(/[-_]/g, ' ')
+            .replace(/\b\w/g, l => l.toUpperCase());
+          
+          const labels = {
+            poster: 'Poster Design',
+            social: 'Social Media',
+            flyer: 'Flyer Design',
+            card: 'Business Card',
+            logo: 'Logo Design',
+            website: 'Website Design'
+          };
+          
+          return {
+            src: f.path,
+            title: title,
+            category: category,
+            label: labels[category] || 'Design'
+          };
+        });
+      
+      localStorage.setItem(cacheKey, JSON.stringify(images));
+      localStorage.setItem(cacheTimeKey, String(Date.now()));
+      
+      return images;
+    } catch(e) {
+      console.log('Kosa la kupakia:', e);
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) return JSON.parse(cached);
+      return [];
+    }
+  }
+
+  async function renderPortfolio() {
+    const portfolioGrid = document.getElementById('portfolioGrid');
+    if (!portfolioGrid) return;
+    
+    portfolioGrid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#8a8a8a;">Inapakia kazi...</div>';
+    
+    const portfolioData = await loadPortfolioImages();
+    
+    if (!portfolioData.length) {
+      portfolioGrid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#8a8a8a;">Hakuna picha bado.</div>';
+      return;
+    }
+    
+    portfolioGrid.innerHTML = portfolioData.map((item, index) => `
+      <div class="portfolio-item" data-category="${item.category}" data-index="${index}">
+        <img src="${item.src}" alt="${item.title}" loading="lazy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22><rect fill=%22%23161616%22 width=%22400%22 height=%22500%22/><text x=%22200%22 y=%22250%22 fill=%22%23d4af37%22 font-family=%22sans-serif%22 font-size=%2224%22 text-anchor=%22middle%22>${item.label}</text></svg>'">
+        <div class="portfolio-overlay">
+          <span>${item.label}</span>
+          <h4>${item.title}</h4>
+        </div>
       </div>
-    </div>
-  `).join('');
+    `).join('');
+    
+    // Washa filters na lightbox
+    setupFilters();
+    setupLightbox();
+  }
 
-  // Filters
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const items = document.querySelectorAll('.portfolio-item');
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      items.forEach(item => {
-        const match = filter === 'all' || item.dataset.category === filter;
-        item.classList.toggle('hidden', !match);
-        if (match) item.style.animation = 'zoomIn 0.5s ease';
+  function setupFilters() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const items = document.querySelectorAll('.portfolio-item');
+    
+    filterBtns.forEach(btn => {
+      const newBtn = btn.cloneNode(true);
+      btn.parentNode.replaceChild(newBtn, btn);
+      
+      newBtn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        newBtn.classList.add('active');
+        const filter = newBtn.dataset.filter;
+        items.forEach(item => {
+          const match = filter === 'all' || item.dataset.category === filter;
+          item.classList.toggle('hidden', !match);
+          if (match) item.style.animation = 'zoomIn 0.5s ease';
+        });
       });
     });
-  });
+  }
 
-  // Lightbox
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightboxImg');
-  const lightboxClose = document.getElementById('lightboxClose');
-  items.forEach(item => {
-    item.addEventListener('click', () => {
-      const img = item.querySelector('img');
-      lightboxImg.src = img.src;
-      lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
+  function setupLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+    
+    if (!lightbox) return;
+    
+    document.querySelectorAll('.portfolio-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        lightboxImg.src = img.src;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
     });
-  });
-  const closeLightbox = () => {
-    lightbox.classList.remove('active');
-    document.body.style.overflow = '';
-  };
-  lightboxClose.addEventListener('click', closeLightbox);
-  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+    
+    const closeLightbox = () => {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    };
+    
+    const newCloseBtn = lightboxClose.cloneNode(true);
+    lightboxClose.parentNode.replaceChild(newCloseBtn, lightboxClose);
+    newCloseBtn.addEventListener('click', closeLightbox);
+    
+    lightbox.onclick = e => { if (e.target === lightbox) closeLightbox(); };
+    
+    document.addEventListener('keydown', e => { 
+      if (e.key === 'Escape') closeLightbox(); 
+    });
+  }
+
+  // Anza kupakia portfolio
+  renderPortfolio();
 
   // ===== REVEAL ON SCROLL =====
   const revealEls = document.querySelectorAll('.reveal');
