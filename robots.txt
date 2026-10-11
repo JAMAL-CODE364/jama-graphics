@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jamal-code364.github.io/jama-graphics/sitemap.xml
