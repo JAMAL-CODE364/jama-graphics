@@ -1109,6 +1109,19 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
+    /* ===== LANGUAGE TOGGLE ===== */
+.lang-btn {
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px;
+  padding: 0 12px !important;
+  width: auto !important;
+  border-radius: 100px !important;
+}
+.lang-btn:hover {
+  background: var(--gold) !important;
+  color: #0a0a0a !important;
+}
   }
 </style>
     <!-- ===== GOOGLE ANALYTICS ===== -->
@@ -1149,6 +1162,7 @@
   <div class="nav-tools">
     <button class="nav-tool" id="themeToggle" title="Badilisha theme" aria-label="Badilisha theme">🌙</button>
     <button class="menu-toggle" id="menuToggle" aria-label="Fungua menu">☰</button>
+    <button class="nav-tool lang-btn" id="langToggle" title="Language / Lugha">🌐 EN</button>
   </div>
 </nav>
 
@@ -1710,6 +1724,158 @@
   window.addEventListener('scroll', () => backTop.classList.toggle('show', window.scrollY > 500));
   backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 })();
+  // ==========================================================
+// LANGUAGE SWITCHER
+// ==========================================================
+const langBtn = document.getElementById('langToggle');
+const TRANSLATIONS = {
+  // Navigation
+  'Nyumbani': 'Home',
+  'Huduma': 'Services',
+  'Kazi Zangu': 'Portfolio',
+  'Kuhusu': 'About',
+  'Wasiliana': 'Contact',
+  
+  // Hero
+  'Creative Design Studio': 'Creative Design Studio',
+  'Kubuni Mawazo Yako Kuwa Uhalisia.': 'Turn Your Ideas Into Reality.',
+  'JAMA Graphics ni studio ya ubunifu inayotoa huduma za kisasa za graphics design — kutoka poster, logo, business card hadi website. Tunabadilisha brand yako kuwa ya kipekee.': 'JAMA Graphics is a creative studio offering modern graphic design services — from posters, logos, and business cards to websites. We transform your brand into something unique.',
+  'Ona Kazi Zangu →': 'View My Work →',
+  'Wasiliana Nami': 'Contact Me',
+  'Kazi': 'Projects',
+  'Wateja': 'Clients',
+  'Miaka': 'Years',
+  
+  // Services
+  'Huduma Zangu': 'My Services',
+  'Kila Kitu Unachohitaji Kwa Brand Yako.': 'Everything You Need For Your Brand.',
+  'Huduma za ubunifu za kiwango cha juu zinazolenga kukuza biashara na brand yako.': 'High-level creative services designed to grow your business and brand.',
+  'Poster Design': 'Poster Design',
+  'Poster za matangazo, matukio, na biashara zenye mvuto wa kipekee.': 'Posters for advertising, events, and businesses with unique appeal.',
+  'Social Media Poster': 'Social Media Poster',
+  'Mabango ya Instagram, Facebook, na TikTok yanayovutia wateja.': 'Instagram, Facebook, and TikTok graphics that attract customers.',
+  'Flyer Design': 'Flyer Design',
+  'Flyer za kitaalamu kwa matangazo ya biashara na matukio mbalimbali.': 'Professional flyers for business advertising and various events.',
+  'Business Card': 'Business Card',
+  'Kadi za biashara za kisasa zinazoacha hisia ya kudumu kwa wateja.': 'Modern business cards that leave a lasting impression.',
+  'Website Design': 'Website Design',
+  'Tovuti za kisasa, za haraka na zinazofanya kazi kwenye simu na kompyuta.': 'Modern, fast websites that work on mobile and desktop.',
+  'Logo Design': 'Logo Design',
+  'Logo za kipekee zinazowakilisha utambulisho wa brand yako kikamilifu.': 'Unique logos that fully represent your brand identity.',
+  'Kuanzia': 'From',
+  
+  // Process
+  'Jinsi Tunavyofanya Kazi': 'How We Work',
+  'Mchakato Rahisi. Matokeo Bora.': 'Simple Process. Great Results.',
+  'Hatua nne rahisi kutoka mawazo yako hadi kazi iliyokamilika.': 'Four simple steps from your idea to a finished project.',
+  'Mazungumzo': 'Conversation',
+  'Unatuambia unahitaji nini, tunakuelewa.': 'You tell us what you need, we understand.',
+  'Ubunifu': 'Design',
+  'Tunatengeneza michoro 3 tofauti kwa ajili yako.': 'We create 3 different designs for you.',
+  'Marekebisho': 'Revisions',
+  'Unachagua unayopenda, tunaboresha.': 'You choose your favorite, we refine it.',
+  'Kukabidhi': 'Delivery',
+  'Unapata faili zote za ubora wa juu.': 'You receive all high-quality files.',
+  
+  // Portfolio
+  'Portfolio Yangu.': 'My Portfolio.',
+  'Mkusanyiko wa kazi mbalimbali nilizozifanya kwa wateja na miradi binafsi.': 'A collection of projects I have done for clients and personal work.',
+  'Zote': 'All',
+  'Poster': 'Poster',
+  'Social Media': 'Social Media',
+  'Flyer': 'Flyer',
+  
+  // About
+  'Kuhusu Jama Graphics': 'About Jama Graphics',
+  'Tunabuni. Tunavutia. Tunabadilisha.': 'We Design. We Attract. We Transform.',
+  'JAMA Graphics ni studio ya ubunifu inayojikita katika kutoa huduma bora za graphics design kwa biashara, taasisi, na watu binafsi. Tunachanganya ubunifu wa kisasa na uelewa wa soko la Kitanzania.': 'JAMA Graphics is a creative studio focused on providing excellent graphic design services for businesses, institutions, and individuals. We combine modern creativity with an understanding of the Tanzanian market.',
+  'Kila mradi tunaifanya kwa umakini mkubwa, kuhakikisha brand yako inaonekana tofauti na wengine.': 'We handle every project with great care, ensuring your brand stands out from others.',
+  'Kazi Zilizokamilika': 'Completed Projects',
+  'Wateja Wenye Furaha': 'Happy Clients',
+  
+  // Testimonials
+  'Wateja Wanasema': 'What Clients Say',
+  'Wateja Wanaotuthamini.': 'Clients Who Trust Us.',
+  'Design ya kitaalamu inayoaminika, kukumbukwa, na kukuza biashara.': 'Professional design that is trusted, memorable, and grows your business.',
+  'Mmiliki, Boutique': 'Owner, Boutique',
+  'Marketing Lead': 'Marketing Lead',
+  'Event Manager': 'Event Manager',
+  
+  // Contact
+  'Una Mradi? Tuongee.': 'Have a Project? Let\'s Talk.',
+  'Wasiliana nami kwa simu au barua pepe kwa maelezo zaidi kuhusu huduma zangu.': 'Contact me by phone or email for more details about my services.',
+  'Simu / WhatsApp': 'Phone / WhatsApp',
+  'Barua Pepe': 'Email',
+  'Uko tayari kuboresha brand yako?': 'Ready to improve your brand?',
+  'Kutoka mawazo hadi kazi ya mwisho — wazo lako linalofuata linahitaji ubunifu wa kipekee.': 'From idea to final work — your next big idea needs unique creativity.',
+  'Anza Project →': 'Start Project →',
+  
+  // Footer
+  'Creative Design Studio inayotoa huduma za graphics design za kiwango cha kimataifa Tanzania.': 'Creative Design Studio offering world-class graphic design services in Tanzania.',
+  'Kurasa': 'Pages',
+  'Mawasiliano': 'Contact',
+  'Haki zote zimehifadhiwa.': 'All rights reserved.',
+  'Ubunifu wa Kiwango cha Juu ✨': 'World-Class Creativity ✨'
+};
+
+let currentLang = localStorage.getItem('jama_lang') || 
+  (navigator.language && navigator.language.startsWith('sw') ? 'sw' : 'en');
+
+function applyLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('jama_lang', lang);
+  
+  // Update button text
+  langBtn.textContent = lang === 'sw' ? '🌐 EN' : '🌐 SW';
+  document.documentElement.lang = lang;
+  
+  // Walk through all text nodes and translate
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode: function(node) {
+      if (node.parentElement.closest('script, style')) return NodeFilter.FILTER_REJECT;
+      const text = node.textContent.trim();
+      if (!text) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  
+  const nodes = [];
+  let node;
+  while (node = walker.nextNode()) nodes.push(node);
+  
+  nodes.forEach(textNode => {
+    const text = textNode.textContent.trim();
+    
+    if (lang === 'en') {
+      // Translate to English
+      if (TRANSLATIONS[text]) {
+        textNode.textContent = textNode.textContent.replace(text, TRANSLATIONS[text]);
+      }
+    } else {
+      // Translate back to Swahili
+      const swKey = Object.keys(TRANSLATIONS).find(k => TRANSLATIONS[k] === text);
+      if (swKey) {
+        textNode.textContent = textNode.textContent.replace(text, swKey);
+      }
+    }
+  });
+  
+  // Translate placeholders
+  document.querySelectorAll('[placeholder]').forEach(el => {
+    if (el.dataset.swPh || el.dataset.enPh) {
+      if (lang === 'sw' && el.dataset.swPh) el.placeholder = el.dataset.swPh;
+      if (lang === 'en' && el.dataset.enPh) el.placeholder = el.dataset.enPh;
+    }
+  });
+}
+
+// Toggle language
+langBtn.addEventListener('click', () => {
+  applyLanguage(currentLang === 'sw' ? 'en' : 'sw');
+});
+
+// Apply on load
+applyLanguage(currentLang);
 </script>
 
 </body>
